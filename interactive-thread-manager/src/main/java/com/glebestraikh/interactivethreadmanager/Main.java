@@ -4,42 +4,38 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("=== Программа управления потоком ===");
-        System.out.println("Доступные команды:");
-        System.out.println("начать    - запустить поток");
-        System.out.println("приостановить - приостановить поток");
-        System.out.println("продолжить - возобновить поток");
-        System.out.println("завершить  - завершить программу");
-        System.out.println("======================================");
-
-        ThreadCommandManager threadManager = new ThreadCommandManager();
+        ThreadController threadController = new ThreadController();
 
         Scanner scanner = new Scanner(System.in);
 
-        boolean continueRunning = true;
-        while (continueRunning) {
-            String command = scanner.nextLine().trim();
+        System.out.println("\nВыберите действие:");
+        System.out.println("1 - Запустить поток");
+        System.out.println("2 - Приостановить поток");
+        System.out.println("3 - Возобновить поток");
+        System.out.println("4 - Выход");
 
-            switch (command.toLowerCase()) {
-                case "начать":
-                    threadManager.startThread();
+        while (true) {
+
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    threadController.startThread();
                     break;
-                case "пауза":
-                    threadManager.pauseThread();
+                case 2:
+                    threadController.pauseThread();
                     break;
-                case "старт":
-                    threadManager.resumeThread();
+                case 3:
+                    threadController.resumeThread();
                     break;
-                case "завершить":
-                    threadManager.stopThread();
-                    continueRunning = false;
-                    System.out.println("Программа завершена.");
-                    break;
+                case 4:
+                    System.out.println("Завершение программы...");
+                    threadController.stopThread();
+                    scanner.close();
+                    System.exit(0);
                 default:
-                    System.out.println("Неизвестная команда. Доступные команды: начать, приостановить, продолжить, завершить");
+                    System.out.println("Неверный выбор, попробуйте снова");
             }
         }
-
-        scanner.close();
     }
 }
