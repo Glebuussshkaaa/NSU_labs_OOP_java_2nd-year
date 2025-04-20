@@ -4,7 +4,11 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Stack;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+// нужно перенаазвать класс
+// потмоу что у java такой же есть
 public class Context {
     private final Stack<Double> values;
     private final HashMap<String, Double> variables;
@@ -23,29 +27,23 @@ public class Context {
     public void pushStackValue(Object value) {
         try {
             values.push(Double.valueOf(value.toString()));
-        }
-        catch (NumberFormatException |
-               NullPointerException ex) {
-            throw new ArgumentsFormatException();
+        } catch (NumberFormatException | NullPointerException ex) {
+            throw new IllegalArgumentException("Invalid number format for stack value", ex);
         }
     }
 
     public Double peekStackValue() {
-        try {
-            return values.peek();
+        if (values.isEmpty()) {
+            throw new IllegalStateException("Stack is empty");
         }
-        catch (java.util.EmptyStackException ex) {
-            throw new EmptyStackException();
-        }
+        return values.peek();
     }
 
     public Double popStackValue() {
-        try {
-            return values.pop();
+        if (values.isEmpty()) {
+            throw new IllegalStateException("Stack is empty");
         }
-        catch (java.util.EmptyStackException ex) {
-            throw new EmptyStackException();
-        }
+        return values.pop();
     }
 
     public boolean isCorrectVariableName(String name) {
@@ -55,19 +53,16 @@ public class Context {
     }
 
     public void addVariable(Object name, Object value) {
-        if (name == null || !isCorrectVariableName(name.toString()))
-            throw new VariableNameException();
-
-        if (variables.containsKey(name.toString()))
-            throw new VariableOverwritingException();
-
-        try {
-            variables.put(name.toString(),
-                    Double.valueOf(value.toString()));
+        if (name == null || !isCorrectVariableName(name.toString())) {
+            throw new IllegalArgumentException("Invalid variable name");
         }
-        catch (NumberFormatException |
-               NullPointerException ex) {
-            throw new ArgumentsFormatException();
+        if (variables.containsKey(name.toString())) {
+            throw new IllegalStateException("Variable already exists");
+        }
+        try {
+            variables.put(name.toString(), Double.valueOf(value.toString()));
+        } catch (NumberFormatException | NullPointerException ex) {
+            throw new IllegalArgumentException("Invalid number format for variable value", ex);
         }
     }
 

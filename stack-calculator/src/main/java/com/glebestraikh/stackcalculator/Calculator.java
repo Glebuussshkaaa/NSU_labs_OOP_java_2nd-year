@@ -1,8 +1,9 @@
 package com.glebestraikh.stackcalculator;
 
-import java.io.Closeable;
-import java.io.InputStream;
-import java.io.OutputStream;
+import com.glebestraikh.stackcalculator.commands.Command;
+
+import java.io.*;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Calculator implements Closeable {
@@ -24,46 +25,37 @@ public class Calculator implements Closeable {
 
         logger.info("Create command creator");
         CommandCreator cmdCreator = new CommandCreator();
-        
+
         logger.info("Start reading lines with commands from input stream");
+        // можно ли проще
         try (BufferedReader buffIn = new BufferedReader(new InputStreamReader(in))) {
             String line;
             while ((line = buffIn.readLine()) != null) {
-                // Parse read line (Extract command name and arguments)
                 logger.info("Parse read line");
                 cmdParser.parse(line);
 
-                // Empty line or comment
-                if (cmdParser.getCommandName() == null)
+                if (cmdParser.getCommandName() == null) {
                     continue;
+                }
 
-                // Create command
                 logger.info("Create command \"" + cmdParser.getCommandName() + "\"");
                 Command cmd;
                 try {
                     cmd = cmdCreator.create(cmdParser.getCommandName());
-                } catch (CommandNotCreatedException ex) {
-                    // Command is not created
-                    logger.warn("Exception: ",
-                            ex);
+                } catch (IllegalArgumentException ex) {
+                    logger.log(Level.WARNING, "Invalid command: " + cmdParser.getCommandName(), ex);
                     continue;
                 }
 
-                // Run command
-                logger.info("Launch command \"" + cmdParser.getCommandName() + "\"");
+                logger.info("Run command \"" + cmdParser.getCommandName() + "\"");
                 try {
-                    cmd.run(cmdParser.getCommandArgs(),
-                            context);
-                } catch (CommandException |
-                         ContextException ex) {
-                    // Command is not launched
-                    logger.warn("Exception: ",
-                            ex);
+                    cmd.run(cmdParser.getCommandArgs(), context);
+                }  catch (RuntimeException ex) {
+                    logger.log(Level.WARNING, "Error executing command: " + cmdParser.getCommandName(), ex);
                 }
             }
         } catch (IOException ex) {
-            logger.error("Exception: ",
-                    ex);
+            logger.log(Level.SEVERE, "I/O error during command processing", ex);
             System.exit(1);
         }
     }
