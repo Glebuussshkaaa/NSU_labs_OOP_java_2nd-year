@@ -31,7 +31,7 @@ public class CommandFactory {
     }
 
     public Command create(String commandName) {
-        try { // тупое имя className 
+        try {
             String className = properties.getProperty(commandName.toUpperCase());
             if (className == null) {
                 throw new IllegalArgumentException("Command not found: " + commandName);

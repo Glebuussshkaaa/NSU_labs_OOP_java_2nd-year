@@ -1,6 +1,6 @@
 package com.glebestraikh.stackcalculator.commands;
 
-import com.glebestraikh.stackcalculator.Context;
+import com.glebestraikh.stackcalculator.ExecutionContext;
 
 import java.util.EmptyStackException;
 import java.util.List;
@@ -8,7 +8,7 @@ import java.util.List;
 public class AddCommand implements Command
 {
     @Override
-    public void run(List<String> args, Context context) {
+    public void run(List<String> args, ExecutionContext context) {
         // Проверка, что аргументов нет
         if (!args.isEmpty())
             throw new IllegalArgumentException("Add command does not take any arguments");

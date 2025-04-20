@@ -18,40 +18,39 @@ public class Calculator implements Closeable {
 
     void run() {
         logger.info("Create calculator context");
-        Context context = new Context(out);
+        ExecutionContext context = new ExecutionContext(out);
 
-        logger.info("Create command creator");
-        CommandFactory cmdCreator = new CommandFactory();
+        logger.info("Create command factory");
+        CommandFactory CommandFactory = new CommandFactory();
 
         logger.info("Create parser of lines with commands");
-        CommandParser cmdParser = new CommandParser();
+        CommandParser CommandParser = new CommandParser();
 
         logger.info("Start reading lines with commands from input stream");
-        // можно ли проще
         try (BufferedReader buffIn = new BufferedReader(new InputStreamReader(in))) {
             String line;
             while ((line = buffIn.readLine()) != null) {
                 logger.info("Parse read line");
-                cmdParser.parse(line);
+                CommandParser.parse(line);
 
-                if (cmdParser.getCommandName() == null) {
+                if (CommandParser.getCommandName() == null) {
                     continue;
                 }
 
-                logger.info("Create command \"" + cmdParser.getCommandName() + "\"");
-                Command cmd;
+                logger.info("Create command \"" + CommandParser.getCommandName() + "\"");
+                Command Command;
                 try {
-                    cmd = cmdCreator.create(cmdParser.getCommandName());
+                    Command = CommandFactory.create(CommandParser.getCommandName());
                 } catch (IllegalArgumentException ex) {
-                    logger.log(Level.WARNING, "Invalid command: " + cmdParser.getCommandName(), ex);
+                    logger.log(Level.WARNING, "Invalid command: " + CommandParser.getCommandName(), ex);
                     continue;
                 }
 
-                logger.info("Run command \"" + cmdParser.getCommandName() + "\"");
+                logger.info("Run command \"" + CommandParser.getCommandName() + "\"");
                 try {
-                    cmd.run(cmdParser.getCommandArgs(), context);
+                    Command.run(CommandParser.getCommandArgs(), context);
                 }  catch (RuntimeException ex) {
-                    logger.log(Level.WARNING, "Error executing command: " + cmdParser.getCommandName(), ex);
+                    logger.log(Level.WARNING, "Error executing command: " + CommandParser.getCommandName(), ex);
                 }
             }
         } catch (IOException ex) {

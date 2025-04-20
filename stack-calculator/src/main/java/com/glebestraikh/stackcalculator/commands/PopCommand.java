@@ -1,13 +1,13 @@
 package com.glebestraikh.stackcalculator.commands;
 
-import com.glebestraikh.stackcalculator.Context;
+import com.glebestraikh.stackcalculator.ExecutionContext;
 
 import java.util.EmptyStackException;
 import java.util.List;
 
 public class PopCommand implements Command {
     @Override
-    public void run(List<String> args, Context context) {
+    public void run(List<String> args, ExecutionContext context) {
         // Проверка количества аргументов
         if (!args.isEmpty())
             throw new IllegalArgumentException("Pop command does not take any arguments");

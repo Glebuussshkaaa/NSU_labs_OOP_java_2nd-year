@@ -4,23 +4,20 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Stack;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-// нужно перенаазвать класс
-// потмоу что у java такой же есть
-public class Context {
+public class ExecutionContext {
     private final Stack<Double> values;
     private final HashMap<String, Double> variables;
     private final PrintStream out;
 
-    public Context(OutputStream out) {
+    public ExecutionContext(OutputStream out) {
         values = new Stack<>();
         variables = new HashMap<>();
         this.out = new PrintStream(out);
     }
 
-    public void println(Object obj) {
+    public void printTopElement(Object obj) {
         out.println(obj);
     }
 
@@ -47,9 +44,7 @@ public class Context {
     }
 
     public boolean isCorrectVariableName(String name) {
-        Pattern namePattern = Pattern.compile("^[a-zA-Z]\\w*$");
-        Matcher matcher = namePattern.matcher(name);
-        return matcher.matches();
+        return Pattern.matches("^[a-zA-Z]\\w*$", name);
     }
 
     public void addVariable(Object name, Object value) {
@@ -70,3 +65,4 @@ public class Context {
         return variables.get(name);
     }
 }
+

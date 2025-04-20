@@ -1,12 +1,12 @@
 package com.glebestraikh.stackcalculator.commands;
 
-import com.glebestraikh.stackcalculator.Context;
+import com.glebestraikh.stackcalculator.ExecutionContext;
 
 import java.util.List;
 
 public class PushCommand implements Command {
     @Override
-    public void run(List<String> args, Context context) {
+    public void run(List<String> args, ExecutionContext context) {
         if (args.size() != 1) {
             throw new IllegalArgumentException("Command 'push' requires exactly one argument.");
         }
