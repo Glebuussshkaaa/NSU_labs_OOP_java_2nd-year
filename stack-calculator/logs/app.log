@@ -1,0 +1,30 @@
+апр. 21, 2025 1:43:06 AM com.glebestraikh.stackcalculator.Main main
+INFO: Parse command line arguments
+апр. 21, 2025 1:43:06 AM com.glebestraikh.stackcalculator.Main main
+INFO: Input file: Using standard input
+апр. 21, 2025 1:43:06 AM com.glebestraikh.stackcalculator.Main main
+INFO: Create calculator
+апр. 21, 2025 1:43:06 AM com.glebestraikh.stackcalculator.Main main
+INFO: Launch calculator
+апр. 21, 2025 1:43:06 AM com.glebestraikh.stackcalculator.Calculator run
+INFO: Create calculator context
+апр. 21, 2025 1:43:06 AM com.glebestraikh.stackcalculator.Calculator run
+INFO: Create parser of lines with commands
+апр. 21, 2025 1:43:06 AM com.glebestraikh.stackcalculator.Calculator run
+INFO: Create command creator
+апр. 21, 2025 1:43:06 AM com.glebestraikh.stackcalculator.Calculator run
+INFO: Start reading lines with commands from input stream
+апр. 21, 2025 1:43:09 AM com.glebestraikh.stackcalculator.Calculator run
+INFO: Parse read line
+апр. 21, 2025 1:43:09 AM com.glebestraikh.stackcalculator.Calculator run
+INFO: Create command "print"
+апр. 21, 2025 1:43:09 AM com.glebestraikh.stackcalculator.Calculator run
+INFO: Run command "print"
+апр. 21, 2025 1:43:09 AM com.glebestraikh.stackcalculator.Calculator run
+WARNING: Error executing command: print
+java.lang.IllegalStateException: Stack is empty
+	at com.glebestraikh.stackcalculator.Context.peekStackValue(Context.java:37)
+	at com.glebestraikh.stackcalculator.commands.PrintCommand.run(PrintCommand.java:17)
+	at com.glebestraikh.stackcalculator.Calculator.run(Calculator.java:52)
+	at com.glebestraikh.stackcalculator.Main.main(Main.java:37)
+

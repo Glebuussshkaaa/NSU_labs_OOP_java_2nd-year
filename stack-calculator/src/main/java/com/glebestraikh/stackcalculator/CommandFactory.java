@@ -5,11 +5,10 @@ import com.glebestraikh.stackcalculator.commands.Command;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class CommandCreator {
+public class CommandFactory {
     private final Properties properties;
 
-    // можно ли по другому
-    public CommandCreator() {
+    public CommandFactory() {
         ClassLoader classLoader;
         try {
             classLoader = Main.class.getClassLoader();
@@ -20,10 +19,6 @@ public class CommandCreator {
             throw new IllegalStateException("Security exception occurred while getting class loader.", ex);
         }
 
-        // можно заменить InputStream на класс
-//        try (InputStream resourceIn = classLoader.getResourceAsStream("commands.properties")) {
-//            System.out.println("Class of InputStream: " + resourceIn.getClass().getName());
-//        }
         try (InputStream resourceIn = classLoader.getResourceAsStream("commands.properties")) {
             if (resourceIn == null) {
                 throw new IllegalArgumentException("Resource 'commands.properties' not found.");

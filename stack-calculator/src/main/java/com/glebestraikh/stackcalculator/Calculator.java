@@ -20,11 +20,11 @@ public class Calculator implements Closeable {
         logger.info("Create calculator context");
         Context context = new Context(out);
 
+        logger.info("Create command creator");
+        CommandFactory cmdCreator = new CommandFactory();
+
         logger.info("Create parser of lines with commands");
         CommandParser cmdParser = new CommandParser();
-
-        logger.info("Create command creator");
-        CommandCreator cmdCreator = new CommandCreator();
 
         logger.info("Start reading lines with commands from input stream");
         // можно ли проще
