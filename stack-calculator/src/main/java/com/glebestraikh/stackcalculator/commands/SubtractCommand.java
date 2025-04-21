@@ -1,36 +1,29 @@
 package com.glebestraikh.stackcalculator.commands;
 
 import com.glebestraikh.stackcalculator.ExecutionContext;
+import com.glebestraikh.stackcalculator.exceptions.commands.ArgumentsNumberException;
+import com.glebestraikh.stackcalculator.exceptions.commands.CommandException;
+import com.glebestraikh.stackcalculator.exceptions.executionContext.EmptyContextStackException;
 
-import java.util.EmptyStackException;
 import java.util.List;
 
 public class SubtractCommand implements Command {
     @Override
-    public void run(List<String> args, ExecutionContext context) {
-        // Проверка количества аргументов
-        if (!args.isEmpty())
-            throw new IllegalArgumentException("Subtract command does not take any arguments");
-
-        // Извлечение вычитаемого
-        Double subtrahend;
-        try {
-            subtrahend = context.popStackValue();
-        } catch (EmptyStackException ex) {
-            throw new IllegalStateException("Stack does not contain enough operands for subtraction", ex);
+    public void run(List<String> CommandArgs, ExecutionContext context) {
+        if (!CommandArgs.isEmpty()) {
+            throw new ArgumentsNumberException();
         }
 
-        // Извлечение уменьшаемого
+        Double subtrahend = context.popStackValue();
+
         Double minuend;
         try {
             minuend = context.popStackValue();
-        } catch (EmptyStackException ex) {
-            // Возврат вычитаемого обратно в стек
+        } catch (EmptyContextStackException ex) {
             context.pushStackValue(subtrahend);
-            throw new IllegalStateException("Stack does not contain enough operands for subtraction", ex);
+            throw ex;
         }
 
-        // Запись результата обратно в стек
         context.pushStackValue(minuend - subtrahend);
     }
 }

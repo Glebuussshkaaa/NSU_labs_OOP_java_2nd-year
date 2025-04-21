@@ -1,6 +1,9 @@
 package com.glebestraikh.stackcalculator;
 
 import com.glebestraikh.stackcalculator.commands.Command;
+import com.glebestraikh.stackcalculator.exceptions.commandFactory.CommandNotCreatedException;
+import com.glebestraikh.stackcalculator.exceptions.commands.CommandException;
+import com.glebestraikh.stackcalculator.exceptions.executionContext.ContextException;
 
 import java.io.*;
 import java.util.logging.Level;
@@ -17,8 +20,8 @@ public class Calculator implements Closeable {
     }
 
     void run() {
-        logger.info("Create calculator context");
-        ExecutionContext context = new ExecutionContext(out);
+        logger.info("Create execution context");
+        ExecutionContext ExecutionContext = new ExecutionContext(out);
 
         logger.info("Create command factory");
         CommandFactory CommandFactory = new CommandFactory();
@@ -41,15 +44,15 @@ public class Calculator implements Closeable {
                 Command Command;
                 try {
                     Command = CommandFactory.create(CommandParser.getCommandName());
-                } catch (IllegalArgumentException ex) {
+                } catch (CommandNotCreatedException ex) {
                     logger.log(Level.WARNING, "Invalid command: " + CommandParser.getCommandName(), ex);
                     continue;
                 }
 
                 logger.info("Run command \"" + CommandParser.getCommandName() + "\"");
                 try {
-                    Command.run(CommandParser.getCommandArgs(), context);
-                }  catch (RuntimeException ex) {
+                    Command.run(CommandParser.getCommandArgs(), ExecutionContext);
+                }  catch (CommandException | ContextException ex) {
                     logger.log(Level.WARNING, "Error executing command: " + CommandParser.getCommandName(), ex);
                 }
             }

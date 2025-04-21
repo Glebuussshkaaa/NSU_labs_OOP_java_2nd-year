@@ -1,37 +1,28 @@
 package com.glebestraikh.stackcalculator.commands;
 
 import com.glebestraikh.stackcalculator.ExecutionContext;
+import com.glebestraikh.stackcalculator.exceptions.commands.ArgumentsNumberException;
+import com.glebestraikh.stackcalculator.exceptions.executionContext.EmptyContextStackException;
 
-import java.util.EmptyStackException;
 import java.util.List;
 
-public class AddCommand implements Command
-{
+public class AddCommand implements Command {
     @Override
-    public void run(List<String> args, ExecutionContext context) {
-        // Проверка, что аргументов нет
-        if (!args.isEmpty())
-            throw new IllegalArgumentException("Add command does not take any arguments");
-
-        // Извлекаем второе слагаемое со стека
-        Double addend2;
-        try {
-            addend2 = context.popStackValue();
-        } catch (EmptyStackException ex) {
-            throw new IllegalStateException("Stack does not contain enough operands for addition", ex);
+    public void run(List<String> CommandArgs, ExecutionContext context) {
+        if (!CommandArgs.isEmpty()) {
+            throw new ArgumentsNumberException();
         }
 
-        // Извлекаем первое слагаемое
-        Double addend1;
+        Double rightOperand = context.popStackValue();
+
+        Double leftOperand;
         try {
-            addend1 = context.popStackValue();
-        } catch (EmptyStackException ex) {
-            // Возвращаем второе слагаемое обратно в стек
-            context.pushStackValue(addend2);
-            throw new IllegalStateException("Stack does not contain enough operands for addition", ex);
+            leftOperand = context.popStackValue();
+        } catch (EmptyContextStackException ex) {
+            context.pushStackValue(rightOperand);
+            throw ex;
         }
 
-        // Кладем результат обратно в стек
-        context.pushStackValue(addend1 + addend2);
+        context.pushStackValue(leftOperand + rightOperand);
     }
 }

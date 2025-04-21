@@ -1,41 +1,34 @@
 package com.glebestraikh.stackcalculator.commands;
 
 import com.glebestraikh.stackcalculator.ExecutionContext;
+import com.glebestraikh.stackcalculator.exceptions.commands.ArgumentsNumberException;
+import com.glebestraikh.stackcalculator.exceptions.commands.DivisionByZeroException;
+import com.glebestraikh.stackcalculator.exceptions.executionContext.EmptyContextStackException;
 
-import java.util.EmptyStackException;
 import java.util.List;
 
 public class DivideCommand implements Command {
     @Override
-    public void run(List<String> args, ExecutionContext context) {
-        // Проверка количества аргументов
-        if (!args.isEmpty())
-            throw new IllegalArgumentException("Divide command does not take any arguments");
-
-        // Извлечение делителя
-        Double divisor;
-        try {
-            divisor = context.popStackValue();
-        } catch (EmptyStackException ex) {
-            throw new IllegalStateException("Stack does not contain enough operands for division", ex);
+    public void run(List<String> CommandArgs, ExecutionContext context) {
+        if (!CommandArgs.isEmpty()) {
+            throw new ArgumentsNumberException();
         }
 
-        // Проверка деления на ноль
+        Double divisor = context.popStackValue();
+
         if (Math.abs(divisor) < 1.0E-09) {
             context.pushStackValue(divisor);
-            throw new ArithmeticException("Division by zero");
+            throw new DivisionByZeroException();
         }
 
-        // Извлечение делимого
         Double dividend;
         try {
             dividend = context.popStackValue();
-        } catch (EmptyStackException ex) {
+        } catch (EmptyContextStackException ex) {
             context.pushStackValue(divisor);
-            throw new IllegalStateException("Stack does not contain enough operands for division", ex);
+            throw ex;
         }
 
-        // Запись результата обратно в стек
         context.pushStackValue(dividend / divisor);
     }
 }

@@ -5,5 +5,5 @@ import com.glebestraikh.stackcalculator.ExecutionContext;
 import java.util.List;
 
 public interface Command {
-    void run(List<String> args, ExecutionContext context);
+    void run(List<String> CommandArgs, ExecutionContext context);
 }

@@ -2,6 +2,7 @@ package com.glebestraikh.stackcalculator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -26,9 +27,10 @@ public class CommandParser {
 
         try {
             commandName = commandArgs.removeFirst();
-            if (commandName.isEmpty())
+            if (commandName.isEmpty()) {
                 commandName = null;
-        } catch (IndexOutOfBoundsException ex) {
+            }
+        } catch (NoSuchElementException ex) {
             commandName = null;
         }
     }

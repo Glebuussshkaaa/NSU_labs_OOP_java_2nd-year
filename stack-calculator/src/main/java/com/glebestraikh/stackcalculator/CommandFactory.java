@@ -1,6 +1,9 @@
 package com.glebestraikh.stackcalculator;
 
 import com.glebestraikh.stackcalculator.commands.Command;
+import com.glebestraikh.stackcalculator.exceptions.commandFactory.ClassLoaderException;
+import com.glebestraikh.stackcalculator.exceptions.commandFactory.CommandNotCreatedException;
+import com.glebestraikh.stackcalculator.exceptions.commandFactory.ResourceException;
 
 import java.io.InputStream;
 import java.util.Properties;
@@ -13,32 +16,26 @@ public class CommandFactory {
         try {
             classLoader = Main.class.getClassLoader();
             if (classLoader == null) {
-                throw new IllegalStateException("Could not get class loader.");
+                throw new ClassLoaderException();
             }
-        } catch (SecurityException ex) { // нужно ли
-            throw new IllegalStateException("Security exception occurred while getting class loader.", ex);
+        } catch (SecurityException ex) {
+            throw new ClassLoaderException();
         }
 
         try (InputStream resourceIn = classLoader.getResourceAsStream("commands.properties")) {
-            if (resourceIn == null) {
-                throw new IllegalArgumentException("Resource 'commands.properties' not found.");
-            }
             properties = new Properties();
             properties.load(resourceIn);
         } catch (Exception ex) {
-            throw new RuntimeException("Failed to load properties file.", ex);
+            throw new ResourceException();
         }
     }
 
     public Command create(String commandName) {
         try {
             String className = properties.getProperty(commandName.toUpperCase());
-            if (className == null) {
-                throw new IllegalArgumentException("Command not found: " + commandName);
-            }
             return (Command) Class.forName(className).getDeclaredConstructor().newInstance();
-        } catch (ReflectiveOperationException ex) { // точно ли токок reflective
-            throw new RuntimeException("Failed to create command instance: " + commandName, ex);
+        } catch (Exception ex) {
+            throw new CommandNotCreatedException();
         }
     }
 }

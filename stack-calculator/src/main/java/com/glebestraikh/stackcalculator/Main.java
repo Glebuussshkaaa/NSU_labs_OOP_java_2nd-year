@@ -12,14 +12,12 @@ public class Main {
     private static final Logger logger = Logger.getLogger(Main.class.getName());
     public static void main(String[] args) {
         try (InputStream config = Main.class.getResourceAsStream("/logging.properties")) {
-            if (config != null) {
-                LogManager.getLogManager().readConfiguration(config);
-            } else {
-                System.err.println("Could not find logging.properties in resources."); // добавить exception
-                System.exit(1);
+            if (config == null) {
+                throw new java.io.FileNotFoundException("Could not find logging.properties in resources.");
             }
+            LogManager.getLogManager().readConfiguration(config);
         } catch (Exception e) {
-            System.err.println("Failed to load logging.properties.");
+            System.err.println("Failed to load logging.properties: " + e.getMessage());
             System.exit(1);
         }
 
