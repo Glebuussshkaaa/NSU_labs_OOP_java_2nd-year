@@ -1,6 +1,7 @@
 DEFINE a 4
 PUSH a
 PUSH a
+EXIT
 *
 SQRT
 PRINT

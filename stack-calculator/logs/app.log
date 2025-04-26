@@ -1,16 +1,40 @@
-апр. 21, 2025 1:05:07 PM com.glebestraikh.stackcalculator.Main main
+апр. 21, 2025 1:22:44 PM com.glebestraikh.stackcalculator.Main main
 INFO: Parse command line arguments
-апр. 21, 2025 1:05:08 PM com.glebestraikh.stackcalculator.Main main
-INFO: Input file: Using standard input
-апр. 21, 2025 1:05:08 PM com.glebestraikh.stackcalculator.Main main
+апр. 21, 2025 1:22:44 PM com.glebestraikh.stackcalculator.Main main
+INFO: Input file: /Users/g.estraikh/Desktop/oop/stack-calculator/ioFiles/inputFile.txt
+апр. 21, 2025 1:22:44 PM com.glebestraikh.stackcalculator.Main main
 INFO: Create calculator
-апр. 21, 2025 1:05:08 PM com.glebestraikh.stackcalculator.Main main
+апр. 21, 2025 1:22:44 PM com.glebestraikh.stackcalculator.Main main
 INFO: Launch calculator
-апр. 21, 2025 1:05:08 PM com.glebestraikh.stackcalculator.Calculator run
+апр. 21, 2025 1:22:44 PM com.glebestraikh.stackcalculator.Calculator run
 INFO: Create execution context
-апр. 21, 2025 1:05:08 PM com.glebestraikh.stackcalculator.Calculator run
+апр. 21, 2025 1:22:44 PM com.glebestraikh.stackcalculator.Calculator run
 INFO: Create command factory
-апр. 21, 2025 1:05:08 PM com.glebestraikh.stackcalculator.Calculator run
+апр. 21, 2025 1:22:44 PM com.glebestraikh.stackcalculator.Calculator run
 INFO: Create parser of lines with commands
-апр. 21, 2025 1:05:08 PM com.glebestraikh.stackcalculator.Calculator run
+апр. 21, 2025 1:22:44 PM com.glebestraikh.stackcalculator.Calculator run
 INFO: Start reading lines with commands from input stream
+апр. 21, 2025 1:22:44 PM com.glebestraikh.stackcalculator.Calculator run
+INFO: Parse read line
+апр. 21, 2025 1:22:44 PM com.glebestraikh.stackcalculator.Calculator run
+INFO: Create command "DEFINE"
+апр. 21, 2025 1:22:44 PM com.glebestraikh.stackcalculator.Calculator run
+INFO: Run command "DEFINE"
+апр. 21, 2025 1:22:44 PM com.glebestraikh.stackcalculator.Calculator run
+INFO: Parse read line
+апр. 21, 2025 1:22:44 PM com.glebestraikh.stackcalculator.Calculator run
+INFO: Create command "PUSH"
+апр. 21, 2025 1:22:44 PM com.glebestraikh.stackcalculator.Calculator run
+INFO: Run command "PUSH"
+апр. 21, 2025 1:22:44 PM com.glebestraikh.stackcalculator.Calculator run
+INFO: Parse read line
+апр. 21, 2025 1:22:44 PM com.glebestraikh.stackcalculator.Calculator run
+INFO: Create command "PUSH"
+апр. 21, 2025 1:22:44 PM com.glebestraikh.stackcalculator.Calculator run
+INFO: Run command "PUSH"
+апр. 21, 2025 1:22:44 PM com.glebestraikh.stackcalculator.Calculator run
+INFO: Parse read line
+апр. 21, 2025 1:22:44 PM com.glebestraikh.stackcalculator.Calculator run
+INFO: Create command "EXIT"
+апр. 21, 2025 1:22:44 PM com.glebestraikh.stackcalculator.Calculator run
+INFO: Run command "EXIT"
