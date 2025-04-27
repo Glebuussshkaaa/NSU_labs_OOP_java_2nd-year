@@ -14,7 +14,7 @@ public class Main {
         JFrame frame = new JFrame("PacMan");
         frame.setSize(boardWidth, boardHeight);
         frame.setLocationRelativeTo(null);
-        frame.setResizable(false); // нельзя изменять разер
+        frame.setResizable(false); // нельзя изменять размер
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         Pacman pacmanGame = new Pacman();
