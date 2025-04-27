@@ -1,9 +1,12 @@
-package com.glebestraikh.jpacman;
+package com.glebestraikh.jpacman.model;
+
+import com.glebestraikh.jpacman.controller.CollisionDetector;
 
 import java.awt.Image;
 import java.util.Set;
 
 public class Block {
+    private final char type;
     private int x;
     private int y;
     private final int squareSize;
@@ -16,13 +19,14 @@ public class Block {
     private int velocityX = 0;
     private int velocityY = 0;
 
-    public Block(Image image, int x, int y, int squareSize) {
+    public Block(Image image, int x, int y, int squareSize, char type) {
         this.image = image;
         this.x = x;
         this.y = y;
         this.squareSize = squareSize;
         this.startX = x;
         this.startY = y;
+        this.type = type;
     }
 
     public void updateDirection(char direction, Set<Block> walls, int tileSize) {
@@ -108,6 +112,9 @@ public class Block {
 
     public char getDirection() {
         return direction;
+    }
+    public char getType() {
+        return type;
     }
 
     public void setDirection(char direction) {

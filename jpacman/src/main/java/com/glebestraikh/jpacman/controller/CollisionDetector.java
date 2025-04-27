@@ -1,4 +1,6 @@
-package com.glebestraikh.jpacman;
+package com.glebestraikh.jpacman.controller;
+
+import com.glebestraikh.jpacman.model.Block;
 
 import java.util.Set;
 
@@ -17,6 +19,7 @@ public class CollisionDetector {
     public static boolean canChangeDirection(Block block, char newDirection, Set<Block> walls, int tileSize) {
         int nextX = block.getX();
         int nextY = block.getY();
+        char type = block.getType();
 
         if (newDirection == 'U') {
             nextY -= tileSize;
@@ -28,7 +31,7 @@ public class CollisionDetector {
             nextX += tileSize;
         }
 
-        Block virtualBlock = new Block(null, nextX, nextY, block.getSquareSize());
+        Block virtualBlock = new Block(null, nextX, nextY, block.getSquareSize(), type);
 
         for (Block wall : walls) {
             if (checkCollision(virtualBlock, wall)) {
