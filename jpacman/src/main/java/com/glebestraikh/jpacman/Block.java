@@ -1,24 +1,23 @@
 package com.glebestraikh.jpacman;
 
 import java.awt.Image;
-import java.util.HashSet;
+import java.util.Set;
 
 public class Block {
-    int x;
-    int y;
-    int width;
-    int height;
-    Image image;
+    private int x;
+    private int y;
+    private int width;
+    private int height;
+    private Image image;
 
-    int startX;
-    int startY;
-    char direction = 'U'; // U D L R
+    private int startX;
+    private int startY;
+    private char direction = 'U';
+    private char desiredDirection = 'U';
+    private int velocityX = 0;
+    private int velocityY = 0;
 
-    char desiredDirection = 'U'; // начальное направление
-    int velocityX = 0;
-    int velocityY = 0;
-
-    Block(Image image, int x, int y, int width, int height) {
+    public Block(Image image, int x, int y, int width, int height) {
         this.image = image;
         this.x = x;
         this.y = y;
@@ -28,14 +27,14 @@ public class Block {
         this.startY = y;
     }
 
-    void updateDirection(char direction, HashSet<Block> walls, int tileSize) {
+    public void updateDirection(char direction, Set<Block> walls, int tileSize) {
         char prevDirection = this.direction;
         this.direction = direction;
         updateVelocity(tileSize);
         this.x += this.velocityX;
         this.y += this.velocityY;
         for (Block wall : walls) {
-            if (GameUtils.collision(this, wall)) {
+            if (CollisionDetector.checkCollision(this, wall)) {
                 this.x -= this.velocityX;
                 this.y -= this.velocityY;
                 this.direction = prevDirection;
@@ -44,7 +43,7 @@ public class Block {
         }
     }
 
-    void updateVelocity(int tileSize) {
+    private void updateVelocity(int tileSize) {
         if (this.direction == 'U') {
             this.velocityX = 0;
             this.velocityY = -tileSize / 8;
@@ -60,8 +59,80 @@ public class Block {
         }
     }
 
-    void reset() {
+    public void reset() {
         this.x = this.startX;
         this.y = this.startY;
+    }
+
+    public void updatePosition() {
+        this.x += this.velocityX;
+        this.y += this.velocityY;
+    }
+
+    public void revertMovement() {
+        this.x -= this.velocityX;
+        this.y -= this.velocityY;
+    }
+
+    public void setVelocity(int velocityX, int velocityY) {
+        this.velocityX = velocityX;
+        this.velocityY = velocityY;
+    }
+
+    // Getters and setters
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
+    public char getDirection() {
+        return direction;
+    }
+
+    public void setDirection(char direction) {
+        this.direction = direction;
+    }
+
+    public char getDesiredDirection() {
+        return desiredDirection;
+    }
+
+    public void setDesiredDirection(char desiredDirection) {
+        this.desiredDirection = desiredDirection;
+    }
+
+    public int getVelocityX() {
+        return velocityX;
+    }
+
+    public int getVelocityY() {
+        return velocityY;
     }
 }
