@@ -6,23 +6,21 @@ import java.util.Set;
 public class Block {
     private int x;
     private int y;
-    private int width;
-    private int height;
+    private final int squareSize;
     private Image image;
 
-    private int startX;
-    private int startY;
+    private final int startX;
+    private final int startY;
     private char direction = 'U';
     private char desiredDirection = 'U';
     private int velocityX = 0;
     private int velocityY = 0;
 
-    public Block(Image image, int x, int y, int width, int height) {
+    public Block(Image image, int x, int y, int squareSize) {
         this.image = image;
         this.x = x;
         this.y = y;
-        this.width = width;
-        this.height = height;
+        this.squareSize = squareSize;
         this.startX = x;
         this.startY = y;
     }
@@ -96,12 +94,8 @@ public class Block {
         this.y = y;
     }
 
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
+    public int getSquareSize() {
+        return squareSize;
     }
 
     public Image getImage() {

@@ -28,21 +28,21 @@ public class MapLoader {
             "XXXXXXXXXXXXXXXXXXX"
     };
 
-    private final int rowCount;
-    private final int columnCount;
-    private final int tileSize;
-    private final GameResources resources;
+    private static final int rowCount = 21;
+    private static final int columnCount = 19;
+    private static final int squareSize = 32;
+    private static final int boardWidth = columnCount * squareSize;
+    private static final int boardHeight = rowCount * squareSize;
+
+    private final GameSprites GameSprites;
 
     private Set<Block> walls;
     private Set<Block> foods;
     private Set<Block> ghosts;
     private Block pacman;
 
-    public MapLoader(GameResources resources, int rowCount, int columnCount, int tileSize) {
-        this.resources = resources;
-        this.rowCount = rowCount;
-        this.columnCount = columnCount;
-        this.tileSize = tileSize;
+    public MapLoader(GameSprites resources) {
+        this.GameSprites = resources;
     }
 
     public void loadMap() {
@@ -55,28 +55,28 @@ public class MapLoader {
                 String row = tileMap[r];
                 char tileMapChar = row.charAt(c);
 
-                int x = c * tileSize;
-                int y = r * tileSize;
+                int x = c * squareSize;
+                int y = r * squareSize;
 
                 if (tileMapChar == 'X') { //block wall
-                    Block wall = new Block(resources.getWallImage(), x, y, tileSize, tileSize);
+                    Block wall = new Block(GameSprites.getWallImage(), x, y, squareSize);
                     walls.add(wall);
                 } else if (tileMapChar == 'b') { //blue ghost
-                    Block ghost = new Block(resources.getBlueGhostImage(), x, y, tileSize, tileSize);
+                    Block ghost = new Block(GameSprites.getBlueGhostImage(), x, y, squareSize);
                     ghosts.add(ghost);
                 } else if (tileMapChar == 'o') { //orange ghost
-                    Block ghost = new Block(resources.getOrangeGhostImage('R'), x, y, tileSize, tileSize);
+                    Block ghost = new Block(GameSprites.getOrangeGhostImage('R'), x, y, squareSize);
                     ghosts.add(ghost);
                 } else if (tileMapChar == 'p') { //pink ghost
-                    Block ghost = new Block(resources.getPinkGhostImage(), x, y, tileSize, tileSize);
+                    Block ghost = new Block(GameSprites.getPinkGhostImage(), x, y, squareSize);
                     ghosts.add(ghost);
                 } else if (tileMapChar == 'r') { //red ghost
-                    Block ghost = new Block(resources.getRedGhostImage(), x, y, tileSize, tileSize);
+                    Block ghost = new Block(GameSprites.getRedGhostImage(), x, y, squareSize);
                     ghosts.add(ghost);
                 } else if (tileMapChar == 'P') { //pacman
-                    pacman = new Block(resources.getPacmanImage('R', true), x, y, tileSize, tileSize);
+                    pacman = new Block(GameSprites.getPacmanImage('R', true), x, y, squareSize);
                 } else if (tileMapChar == ' ') { //food
-                    Block food = new Block(resources.getPelletImage(), x, y, tileSize, tileSize);
+                    Block food = new Block(GameSprites.getPelletImage(), x, y, squareSize);
                     foods.add(food);
                 }
             }
@@ -97,5 +97,25 @@ public class MapLoader {
 
     public Block getPacman() {
         return pacman;
+    }
+
+    public int getRowCount() {
+        return rowCount;
+    }
+
+    public int getColumnCount() {
+        return columnCount;
+    }
+
+    public int getSquareSize() {
+        return squareSize;
+    }
+
+    public int getBoardWidth() {
+        return boardWidth;
+    }
+
+    public int getBoardHeight() {
+        return boardHeight;
     }
 }

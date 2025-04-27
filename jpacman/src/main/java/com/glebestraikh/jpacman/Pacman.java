@@ -7,17 +7,11 @@ import java.util.Random;
 import javax.swing.*;
 
 public class Pacman extends JPanel implements ActionListener, KeyListener {
-    private final int rowCount = 21;
-    private final int columnCount = 19;
-    private final int tileSize = 32;
-    private final int boardWidth;
-    private final int boardHeight;
-
     private boolean mouthOpen = true;
     private int mouthAnimationCounter = 0;
     private final int mouthAnimationSpeed = 5;
 
-    private final GameResources resources;
+    private final GameSprites GameSprites;
     private final MapLoader mapLoader;
 
     private Set<Block> walls;
@@ -33,22 +27,19 @@ public class Pacman extends JPanel implements ActionListener, KeyListener {
     private boolean gameOver = false;
 
     public Pacman() {
-        boardWidth = columnCount * tileSize;
-        boardHeight = rowCount * tileSize;
-        setPreferredSize(new Dimension(boardWidth, boardHeight));
+        GameSprites = new GameSprites();
+        mapLoader = new MapLoader(GameSprites);
+
+        setPreferredSize(new Dimension(mapLoader.getBoardWidth(), mapLoader.getBoardHeight()));
         setBackground(Color.BLACK);
 
         setFocusable(true);
         requestFocusInWindow();
         addKeyListener(this);
 
-        // Initialize game resources and map
-        resources = new GameResources();
-        mapLoader = new MapLoader(resources, rowCount, columnCount, tileSize);
         initializeGame();
 
-        // Set up game loop
-        gameLoop = new Timer(41, this); // 20fps (1000/50)
+        gameLoop = new Timer(41, this);
         gameLoop.start();
     }
 
@@ -59,10 +50,9 @@ public class Pacman extends JPanel implements ActionListener, KeyListener {
         ghosts = mapLoader.getGhosts();
         pacman = mapLoader.getPacman();
 
-        // Initialize ghost directions
         for (Block ghost : ghosts) {
             char newDirection = directions[random.nextInt(4)];
-            ghost.updateDirection(newDirection, walls, tileSize);
+            ghost.updateDirection(newDirection, walls, mapLoader.getSquareSize());
         }
     }
 
@@ -73,35 +63,30 @@ public class Pacman extends JPanel implements ActionListener, KeyListener {
     }
 
     private void draw(Graphics g) {
-        // Draw walls
         for (Block wall : walls) {
             g.drawImage(wall.getImage(), wall.getX(), wall.getY(),
-                    wall.getWidth(), wall.getHeight(), null);
+                    wall.getSquareSize(), wall.getSquareSize(), null);
         }
 
-        // Draw foods
         for (Block food : foods) {
             g.drawImage(food.getImage(), food.getX(), food.getY(),
-                    food.getWidth(), food.getHeight(), null);
+                    food.getSquareSize(), food.getSquareSize(), null);
         }
 
-        // Draw ghosts
         for (Block ghost : ghosts) {
             g.drawImage(ghost.getImage(), ghost.getX(), ghost.getY(),
-                    ghost.getWidth(), ghost.getHeight(), null);
+                    ghost.getSquareSize(), ghost.getSquareSize(), null);
         }
 
-        // Draw pacman
         g.drawImage(pacman.getImage(), pacman.getX(), pacman.getY(),
-                pacman.getWidth(), pacman.getHeight(), null);
+                pacman.getSquareSize(), pacman.getSquareSize(), null);
 
-        // Draw score and lives
         g.setFont(new Font("Arial", Font.PLAIN, 18));
         g.setColor(Color.WHITE);
         if (gameOver) {
-            g.drawString("Game Over: " + score, tileSize / 2, tileSize / 2);
+            g.drawString("Game Over: " + score,  mapLoader.getSquareSize() / 2,  mapLoader.getSquareSize() / 2);
         } else {
-            g.drawString("x" + lives + " Score: " + score, tileSize / 2, tileSize / 2);
+            g.drawString("x" + lives + " Score: " + score,  mapLoader.getSquareSize() / 2,  mapLoader.getSquareSize() / 2);
         }
     }
 
@@ -117,9 +102,9 @@ public class Pacman extends JPanel implements ActionListener, KeyListener {
     }
 
     private void movePacman() {
-        if (CollisionDetector.isAlignedToGrid(pacman, tileSize)) {
-            if (CollisionDetector.canChangeDirection(pacman, pacman.getDesiredDirection(), walls, tileSize)) {
-                pacman.updateDirection(pacman.getDesiredDirection(), walls, tileSize);
+        if (CollisionDetector.isLocatedInSquare(pacman,  mapLoader.getSquareSize())) {
+            if (CollisionDetector.canChangeDirection(pacman, pacman.getDesiredDirection(), walls,  mapLoader.getSquareSize())) {
+                pacman.updateDirection(pacman.getDesiredDirection(), walls,  mapLoader.getSquareSize());
                 updatePacmanImage();
             }
         }
@@ -158,10 +143,10 @@ public class Pacman extends JPanel implements ActionListener, KeyListener {
             }
 
             // Special behavior for ghosts at a certain Y position
-            if (ghost.getY() == tileSize * 9 &&
+            if (ghost.getY() ==  mapLoader.getSquareSize() * 9 &&
                     ghost.getDirection() != 'U' &&
                     ghost.getDirection() != 'D') {
-                ghost.updateDirection('U', walls, tileSize);
+                ghost.updateDirection('U', walls,  mapLoader.getSquareSize());
             }
 
             // Move ghost
@@ -180,7 +165,7 @@ public class Pacman extends JPanel implements ActionListener, KeyListener {
             // If ghost hit a wall, change direction
             if (collided) {
                 char newDirection = directions[random.nextInt(4)];
-                ghost.updateDirection(newDirection, walls, tileSize);
+                ghost.updateDirection(newDirection, walls,  mapLoader.getSquareSize());
             }
         }
     }
@@ -212,7 +197,7 @@ public class Pacman extends JPanel implements ActionListener, KeyListener {
         for (Block ghost : ghosts) {
             ghost.reset();
             char newDirection = directions[random.nextInt(4)];
-            ghost.updateDirection(newDirection, walls, tileSize);
+            ghost.updateDirection(newDirection, walls,  mapLoader.getSquareSize());
         }
     }
 
@@ -270,6 +255,6 @@ public class Pacman extends JPanel implements ActionListener, KeyListener {
     }
 
     private void updatePacmanImage() {
-        pacman.setImage(resources.getPacmanImage(pacman.getDirection(), mouthOpen));
+        pacman.setImage(GameSprites.getPacmanImage(pacman.getDirection(), mouthOpen));
     }
 }

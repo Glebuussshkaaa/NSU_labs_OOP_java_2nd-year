@@ -3,23 +3,29 @@ package com.glebestraikh.jpacman;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 
-public class GameResources {
+public class GameSprites {
     private Image wallImage;
+
+    private Image pelletImage;
+
     private Image blueGhostImage;
+
     private Image orangeUpGhostImage;
     private Image orangeGhostDownImage;
     private Image orangeGhostRightImage;
     private Image orangeGhostLeftImage;
+
     private Image pinkGhostImage;
+
     private Image redGhostImage;
-    private Image pelletImage;
+
     private Image pacmanOpenUpImage;
     private Image pacmanOpenDownImage;
     private Image pacmanOpenLeftImage;
     private Image pacmanOpenRightImage;
     private Image pacmanClosedImage;
 
-    public GameResources() {
+    public GameSprites() {
         loadImages();
     }
 

@@ -4,13 +4,13 @@ import java.util.Set;
 
 public class CollisionDetector {
     public static boolean checkCollision(Block a, Block b) {
-        return a.getX() < b.getX() + b.getWidth() &&
-                a.getX() + a.getWidth() > b.getX() &&
-                a.getY() < b.getY() + b.getHeight() &&
-                a.getY() + a.getHeight() > b.getY();
+        return a.getX() < b.getX() + b.getSquareSize() &&
+                a.getX() + a.getSquareSize() > b.getX() &&
+                a.getY() < b.getY() + b.getSquareSize() &&
+                a.getY() + a.getSquareSize() > b.getY();
     }
 
-    public static boolean isAlignedToGrid(Block block, int tileSize) {
+    public static boolean isLocatedInSquare(Block block, int tileSize) {
         return block.getX() % tileSize == 0 && block.getY() % tileSize == 0;
     }
 
@@ -28,7 +28,7 @@ public class CollisionDetector {
             nextX += tileSize;
         }
 
-        Block virtualBlock = new Block(null, nextX, nextY, block.getWidth(), block.getHeight());
+        Block virtualBlock = new Block(null, nextX, nextY, block.getSquareSize());
 
         for (Block wall : walls) {
             if (checkCollision(virtualBlock, wall)) {
