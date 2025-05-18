@@ -1,32 +1,29 @@
 package com.glebestraikh.carfactory.threadpool;
 
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.logging.Logger;
 
 public class TaskThread extends Thread {
-    private static final Logger LOGGER = Logger.getLogger(TaskThread.class.getName());
-    private LinkedBlockingQueue<Task> queue;
+    private final LinkedBlockingQueue<Task> personalQueue = new LinkedBlockingQueue<>();
+    private ThreadPool pool;
+
+    public void setThreadPool(ThreadPool pool) {
+        this.pool = pool;
+    }
+
+    public void assignTask(Task task) {
+        personalQueue.offer(task);
+    }
 
     @Override
     public void run() {
-        while (isAlive()) {
-            if (queue == null) {
-                LOGGER.warning("Queue is not set");
-                continue;
-            }
-
-            Task task;
+        while (!isInterrupted()) {
+            pool.registerIdleWorker(this);
             try {
-                task = queue.take();
+                Task task = personalQueue.take();
+                task.execute();
             } catch (InterruptedException e) {
-                return;
+                break;
             }
-
-            task.execute();
         }
-    }
-
-    public void setQueue(LinkedBlockingQueue<Task> queue) {
-        this.queue = queue;
     }
 }

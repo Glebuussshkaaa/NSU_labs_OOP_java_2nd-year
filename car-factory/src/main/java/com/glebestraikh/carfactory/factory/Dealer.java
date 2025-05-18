@@ -22,7 +22,7 @@ public class Dealer extends Thread {
 
     @Override
     public void run() {
-        while (isAlive()) {
+        while (!isInterrupted()) {
             if (saleTime == null) {
                 logger.log(Level.WARNING, "Sale time is not set");
                 continue;

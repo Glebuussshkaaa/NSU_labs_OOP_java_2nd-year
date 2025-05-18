@@ -1,3 +1,4 @@
+
 package com.glebestraikh.carfactory.factory.worker;
 
 import com.glebestraikh.carfactory.threadpool.Task;

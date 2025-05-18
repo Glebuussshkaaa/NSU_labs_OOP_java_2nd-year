@@ -25,7 +25,7 @@ public class Supplier<T extends Detail> extends Thread {
 
     @Override
     public void run() {
-        while (isAlive()) {
+        while (!isInterrupted()) {
             if (productionTime == null) {
                 logger.warning("Production time is not set");
                 continue;
