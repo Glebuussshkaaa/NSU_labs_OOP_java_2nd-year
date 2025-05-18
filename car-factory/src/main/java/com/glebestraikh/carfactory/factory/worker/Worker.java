@@ -5,7 +5,6 @@ import com.glebestraikh.carfactory.util.IdGenerator;
 
 
 public class Worker extends TaskThread {
-
     private final long id = IdGenerator.nextId(Worker.class);
 
     @Override

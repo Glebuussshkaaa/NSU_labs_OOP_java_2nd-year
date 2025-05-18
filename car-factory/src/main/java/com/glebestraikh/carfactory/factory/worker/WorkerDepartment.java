@@ -4,7 +4,6 @@ import com.glebestraikh.carfactory.threadpool.Task;
 import com.glebestraikh.carfactory.threadpool.ThreadPool;
 
 public class WorkerDepartment {
-
     private final ThreadPool threadPool = new ThreadPool();
 
     public WorkerDepartment(int workerCount) {
@@ -17,8 +16,8 @@ public class WorkerDepartment {
         return threadPool.getQueueSize();
     }
 
-    public boolean addTask(Task task) {
-        return threadPool.addTask(task);
+    public void addTask(Task task) {
+        threadPool.addTask(task);
     }
 
     public void start() {

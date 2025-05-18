@@ -25,7 +25,6 @@ public class Factory {
     private final List<Supplier<Accessory>> accessorySuppliers;
 
     private final WorkerDepartment workerDepartment;
-    private final CarStorageController controller;
     private final List<Dealer> dealers;
 
     public Factory() {
@@ -47,7 +46,7 @@ public class Factory {
         workerDepartment = new WorkerDepartment(FactoryConfig.getWorkerCount());
 
         logger.info("Create controller for car storage");
-        controller = new CarStorageController(engineStorage, bodyStorage, accessoryStorage, carStorage, workerDepartment);
+        new CarStorageController(engineStorage, bodyStorage, accessoryStorage, carStorage, workerDepartment);
 
         logger.info("Create dealers");
         dealers = new ArrayList<>();
@@ -55,6 +54,33 @@ public class Factory {
             dealers.add(new Dealer(carStorage));
         }
 
+    }
+
+    public void start() {
+        logger.info("Start factory");
+        engineSupplier.start();
+        bodySupplier.start();
+        for (Supplier<Accessory> accessorySupplier : accessorySuppliers) {
+            accessorySupplier.start();
+        }
+        workerDepartment.start();
+        for (Dealer dealer : dealers) {
+            dealer.start();
+        }
+    }
+
+    public void stop() {
+        for (Dealer dealer : dealers) {
+            dealer.interrupt();
+        }
+        workerDepartment.stop();
+        engineSupplier.interrupt();
+        bodySupplier.interrupt();
+        for (Supplier<Accessory> accessorySupplier : accessorySuppliers) {
+            accessorySupplier.interrupt();
+        }
+
+        logger.info("Stop factory");
     }
 
     public void setEngineProductionTime(int productionTime) {
@@ -91,32 +117,5 @@ public class Factory {
 
     public void addCarStorageObserver(Observer observer) {
         carStorage.addObserver(observer);
-    }
-
-    public void start() {
-        logger.info("Start factory");
-        engineSupplier.start();
-        bodySupplier.start();
-        for (Supplier<Accessory> accessorySupplier : accessorySuppliers) {
-            accessorySupplier.start();
-        }
-        workerDepartment.start();
-        for (Dealer dealer : dealers) {
-            dealer.start();
-        }
-    }
-
-    public void stop() {
-        for (Dealer dealer : dealers) {
-            dealer.interrupt();
-        }
-        workerDepartment.stop();
-        engineSupplier.interrupt();
-        bodySupplier.interrupt();
-        for (Supplier<Accessory> accessorySupplier : accessorySuppliers) {
-            accessorySupplier.interrupt();
-        }
-
-        logger.info("Stop factory");
     }
 }

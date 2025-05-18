@@ -11,7 +11,6 @@ import com.glebestraikh.carfactory.observer.Observer;
 import com.glebestraikh.carfactory.observer.StorageContext;
 
 public class CarStorageController implements Observer {
-
     private static final float OCCUPANCY_PERCENTAGE = 0.75F;
     private final Storage<Engine> engineStorage;
     private final Storage<Body> bodyStorage;
@@ -40,8 +39,8 @@ public class CarStorageController implements Observer {
     }
 
     @Override
-    public void update(StorageContext StorageMovingContext) {
-        evaluateStorageStatus(StorageMovingContext.currentCount(), carStorage.getCapacity());
+    public void update(StorageContext StorageContext) {
+        evaluateStorageStatus(StorageContext.currentCount(), carStorage.getCapacity());
     }
 
     private void evaluateStorageStatus(int currentCarCount, int carStorageCapacity) {

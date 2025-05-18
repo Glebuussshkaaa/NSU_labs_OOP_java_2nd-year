@@ -1,11 +1,11 @@
 package com.glebestraikh.carfactory.threadpool;
 
-import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Logger;
 
 public class TaskThread extends Thread {
     private static final Logger LOGGER = Logger.getLogger(TaskThread.class.getName());
-    private BlockingQueue<Task> queue;
+    private LinkedBlockingQueue<Task> queue;
 
     @Override
     public void run() {
@@ -26,7 +26,7 @@ public class TaskThread extends Thread {
         }
     }
 
-    public void setQueue(BlockingQueue<Task> queue) {
+    public void setQueue(LinkedBlockingQueue<Task> queue) {
         this.queue = queue;
     }
 }

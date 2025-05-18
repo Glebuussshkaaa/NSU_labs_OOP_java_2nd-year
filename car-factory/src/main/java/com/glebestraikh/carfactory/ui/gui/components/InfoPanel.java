@@ -73,10 +73,10 @@ public abstract class InfoPanel extends JPanel implements Observer {
         timeSlider.setPaintLabels(true);
         timeSlider.setMinimum(0);
         timeSlider.setMaximum(SLIDER_MAX_VALUE);
-        timeSlider.setValue(SLIDER_MAX_VALUE / 2);
+        timeSlider.setValue(SLIDER_MAX_VALUE / 6);
         timeSlider.addChangeListener(new SliderListener());
 
-        setFactoryTime(SLIDER_MAX_VALUE / 2);
+        setFactoryTime(SLIDER_MAX_VALUE / 6);
     }
 
     private JLabel createSliderTitle() {

@@ -35,7 +35,7 @@ public class AssemblingTask implements Task {
             bodyStorage.putProduct(body);
             accessoryStorage.putProduct(Accessory);
             return;
-        }
+        } // можно убрать
 
         Car car = new Car(engine, body, Accessory);
 

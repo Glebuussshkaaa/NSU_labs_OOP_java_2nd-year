@@ -63,25 +63,23 @@ public class Storage<T extends Product> extends Observable {
     }
 
     public T takeProduct() {
-        T product = null;
-
         synchronized (products) {
             while (isEmpty() && Thread.currentThread().isAlive()) {
                 try {
                     products.wait();
                 } catch (InterruptedException e) {
-                    return product;
+                    return null;
                 }
             }
 
-            product = products.remove();
+            T product = products.remove();
 
             products.notifyAll();
 
             notifyObservers(new StorageContext(getCurrentProductCount(), producedProductCount));
-        }
 
-        return product;
+            return product;
+        }
     }
 }
 
