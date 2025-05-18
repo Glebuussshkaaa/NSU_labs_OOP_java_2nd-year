@@ -65,10 +65,32 @@ public class PacmanView extends JPanel {
 
         g.setFont(new Font("Arial", Font.PLAIN, 18));
         g.setColor(Color.WHITE);
+
+        int leftTextX = gameMap.getSquareSize() / 4;
+        int textY = gameMap.getSquareSize() / 2;
+
+        int rightTextX = gameMap.getBoardWidth() - 160;
+
         if (controller.isGameOver()) {
-            g.drawString("Game Over: " + controller.getScore(), gameMap.getSquareSize() / 2, gameMap.getSquareSize() / 2);
+            String gameOverText = "Game Over: " + controller.getScore();
+            int centerX = (gameMap.getBoardWidth() - g.getFontMetrics().stringWidth(gameOverText)) / 2;
+            g.drawString(gameOverText, centerX, textY);
+
+            g.drawString("High Score: " + controller.getHighScore(), rightTextX, textY);
+
+            if (controller.isNewHighScore()) {
+                textY += 25;
+                g.setColor(Color.YELLOW);
+                String newHighScoreText = "NEW HIGH SCORE!";
+                int centerHighScoreX = (gameMap.getBoardWidth() - g.getFontMetrics().stringWidth(newHighScoreText)) / 2;
+                g.drawString(newHighScoreText, centerHighScoreX, textY);
+            }
         } else {
-            g.drawString("x" + controller.getLives() + " Score: " + controller.getScore(), gameMap.getSquareSize() / 2, gameMap.getSquareSize() / 2);
+            g.drawString("Lives: x" + controller.getLives(), leftTextX, textY);
+            leftTextX += 75;
+            g.drawString(" Score: " + controller.getScore(), leftTextX, textY);
+
+            g.drawString("High Score: " + controller.getHighScore(), rightTextX, gameMap.getSquareSize() / 2);
         }
     }
 }

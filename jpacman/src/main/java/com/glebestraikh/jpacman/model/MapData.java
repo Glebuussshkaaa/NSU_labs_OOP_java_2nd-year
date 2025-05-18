@@ -1,5 +1,6 @@
 package com.glebestraikh.jpacman.model;
 
+import com.glebestraikh.jpacman.util.PacmanConfigurationException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,14 +11,11 @@ import java.util.List;
 import java.util.Set;
 
 public class MapData {
-    private static final int squareSize = 32;
-    private List<String> tileMap;
+    private static final int SQUARE_SIZE = 32;
     private Set<Block> walls;
     private Set<Block> foods;
     private Set<Block> ghosts;
     private Block pacman;
-    private int rowCount;
-    private int columnCount;
     private int boardWidth;
     private int boardHeight;
 
@@ -32,61 +30,65 @@ public class MapData {
         Set<Block> ghosts = new HashSet<>();
         Block pacman = null;
 
-        try (InputStream inputStream = MapData.class.getResourceAsStream("/board.txt");
-             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+        InputStream inputStream = MapData.class.getResourceAsStream("/board.txt");
+        if (inputStream == null) {
+            throw new PacmanConfigurationException("Could not find board.txt resource.");
+        }
 
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 tileMap.add(line);
             }
-        } catch (IOException | NullPointerException e) {
-            throw new RuntimeException("Failed to load board.txt", e);
+        } catch (IOException e) {
+            throw new PacmanConfigurationException("Error reading board.txt", e);
+        }
+
+        if (tileMap.isEmpty()) {
+            throw new PacmanConfigurationException("board.txt is empty or could not be read properly.");
         }
 
         int rowCount = tileMap.size();
-        int columnCount = tileMap.get(0).length();
-        int boardWidth = columnCount * squareSize;
-        int boardHeight = rowCount * squareSize;
+        int columnCount = tileMap.getFirst().length();
+        int boardWidth = columnCount * SQUARE_SIZE;
+        int boardHeight = rowCount * SQUARE_SIZE;
 
         for (int r = 0; r < rowCount; r++) {
             String row = tileMap.get(r);
+            if (row.length() != columnCount) {
+                throw new PacmanConfigurationException(
+                        "Inconsistent row length at row " + r + ". Expected: " + columnCount + ", Found: " + row.length()
+                );
+            }
             for (int c = 0; c < columnCount; c++) {
                 char tileMapChar = row.charAt(c);
-                int x = c * squareSize;
-                int y = r * squareSize;
+                int x = c * SQUARE_SIZE;
+                int y = r * SQUARE_SIZE;
 
-                if (tileMapChar == 'X') {
-                    walls.add(new Block(gameSprites.getWallImage(), x, y, squareSize, tileMapChar));
-                } else if (tileMapChar == 'b') {
-                    ghosts.add(new Block(gameSprites.getGhostImage('b', 'R'), x, y, squareSize, tileMapChar));
-                } else if (tileMapChar == 'o') {
-                    ghosts.add(new Block(gameSprites.getGhostImage('o', 'R'), x, y, squareSize, tileMapChar));
-                } else if (tileMapChar == 'p') {
-                    ghosts.add(new Block(gameSprites.getGhostImage('p', 'R'), x, y, squareSize, tileMapChar));
-                } else if (tileMapChar == 'r') {
-                    ghosts.add(new Block(gameSprites.getGhostImage('r', 'R'), x, y, squareSize, tileMapChar));
-                } else if (tileMapChar == 'P') {
-                    pacman = new Block(gameSprites.getPacmanImage('R', true), x, y, squareSize, tileMapChar);
-                } else if (tileMapChar == ' ') {
-                    foods.add(new Block(gameSprites.getPelletImage(), x, y, squareSize, tileMapChar));
+                switch (tileMapChar) {
+                    case 'X' -> walls.add(new Block(gameSprites.getWallImage(), x, y, SQUARE_SIZE, tileMapChar));
+                    case 'b' -> ghosts.add(new Block(gameSprites.getGhostImage('b', 'R'), x, y, SQUARE_SIZE, tileMapChar));
+                    case 'o' -> ghosts.add(new Block(gameSprites.getGhostImage('o', 'R'), x, y, SQUARE_SIZE, tileMapChar));
+                    case 'p' -> ghosts.add(new Block(gameSprites.getGhostImage('p', 'R'), x, y, SQUARE_SIZE, tileMapChar));
+                    case 'r' -> ghosts.add(new Block(gameSprites.getGhostImage('r', 'R'), x, y, SQUARE_SIZE, tileMapChar));
+                    case 'P' -> pacman = new Block(gameSprites.getPacmanImage('R', true), x, y, SQUARE_SIZE, tileMapChar);
+                    case ' ' -> foods.add(new Block(gameSprites.getPelletImage(), x, y, SQUARE_SIZE, tileMapChar));
+                    case 'O' -> {}
+                    default -> throw new PacmanConfigurationException("Unknown tile character '" + tileMapChar + "' at (" + r + "," + c + ")");
                 }
             }
         }
 
-        this.tileMap = tileMap;
+        if (pacman == null) {
+            throw new PacmanConfigurationException("Pacman starting position (P) is missing in board.txt.");
+        }
+
         this.walls = walls;
         this.foods = foods;
         this.ghosts = ghosts;
         this.pacman = pacman;
-        this.rowCount = rowCount;
-        this.columnCount = columnCount;
         this.boardWidth = boardWidth;
         this.boardHeight = boardHeight;
-    }
-
-    // Геттеры для полей класса
-    public List<String> getTileMap() {
-        return tileMap;
     }
 
     public Set<Block> getWalls() {
@@ -105,16 +107,8 @@ public class MapData {
         return pacman;
     }
 
-    public int getRowCount() {
-        return rowCount;
-    }
-
-    public int getColumnCount() {
-        return columnCount;
-    }
-
     public int getSquareSize() {
-        return squareSize;
+        return SQUARE_SIZE;
     }
 
     public int getBoardWidth() {

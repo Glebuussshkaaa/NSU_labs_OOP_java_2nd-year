@@ -1,0 +1,3 @@
+#PacMan High Score
+#Mon Apr 28 12:26:45 NOVT 2025
+highScore=370

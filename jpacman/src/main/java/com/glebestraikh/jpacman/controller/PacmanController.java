@@ -1,15 +1,17 @@
 package com.glebestraikh.jpacman.controller;
 
-
 import com.glebestraikh.jpacman.model.Block;
 import com.glebestraikh.jpacman.model.MapData;
 import com.glebestraikh.jpacman.model.GameSprites;
+import com.glebestraikh.jpacman.model.ScoreManager;
 import com.glebestraikh.jpacman.view.PacmanView;
+import com.glebestraikh.jpacman.util.PacmanConfigurationException;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 import javax.swing.Timer;
@@ -22,6 +24,7 @@ public class PacmanController implements ActionListener, KeyListener {
     private final MapData gameMap;
     private final GameSprites gameSprites;
     private final PacmanView view;
+    private final ScoreManager scoreManager;
 
     private Set<Block> walls;
     private Set<Block> foods;
@@ -34,11 +37,17 @@ public class PacmanController implements ActionListener, KeyListener {
     private int score = 0;
     private int lives = 3;
     private boolean gameOver = false;
+    private boolean newHighScore = false;
 
     public PacmanController(MapData gameMap, GameSprites gameSprites, PacmanView view) {
         this.gameSprites = gameSprites;
         this.gameMap = gameMap;
         this.view = view;
+        try {
+            this.scoreManager = new ScoreManager();
+        } catch (PacmanConfigurationException e) {
+            throw new PacmanConfigurationException("Error initializing PacmanController", e);
+        }
 
         view.setController(this);
         view.addKeyListener(this);
@@ -51,7 +60,7 @@ public class PacmanController implements ActionListener, KeyListener {
 
     public void initializeGame() {
         walls = gameMap.getWalls();
-        foods = gameMap.getFoods();
+        foods = new HashSet<>(gameMap.getFoods());
         ghosts = gameMap.getGhosts();
         pacman = gameMap.getPacman();
 
@@ -83,7 +92,6 @@ public class PacmanController implements ActionListener, KeyListener {
 
         pacman.updatePosition();
 
-        // Check wall collisions
         for (Block wall : walls) {
             if (CollisionDetector.checkCollision(pacman, wall)) {
                 pacman.revertMovement();
@@ -103,28 +111,26 @@ public class PacmanController implements ActionListener, KeyListener {
 
     private void moveGhosts() {
         for (Block ghost : ghosts) {
-            // Check if pacman collided with ghost
             if (CollisionDetector.checkCollision(ghost, pacman)) {
                 lives -= 1;
                 if (lives == 0) {
                     gameOver = true;
+                    checkHighScore();
                     return;
                 }
                 resetPositions();
                 return;
             }
 
-            // Special behavior for ghosts at a certain Y position
             if (ghost.getY() == gameMap.getSquareSize() * 9 &&
                     ghost.getDirection() != 'U' &&
                     ghost.getDirection() != 'D') {
                 ghost.updateDirection('U', walls, gameMap.getSquareSize());
+                updateGhostImage(ghost);
             }
 
-            // Move ghost
             ghost.updatePosition();
 
-            // Check wall collisions for ghosts
             boolean collided = false;
             for (Block wall : walls) {
                 if (CollisionDetector.checkCollision(ghost, wall)) {
@@ -134,7 +140,6 @@ public class PacmanController implements ActionListener, KeyListener {
                 }
             }
 
-            // If ghost hit a wall, change direction
             if (collided) {
                 char newDirection = directions[random.nextInt(4)];
                 ghost.updateDirection(newDirection, walls, gameMap.getSquareSize());
@@ -155,6 +160,12 @@ public class PacmanController implements ActionListener, KeyListener {
 
         if (foodEaten != null) {
             foods.remove(foodEaten);
+        }
+    }
+
+    private void checkHighScore() {
+        if (score > 0) {
+            newHighScore = scoreManager.updateHighScore(score);
         }
     }
 
@@ -224,6 +235,7 @@ public class PacmanController implements ActionListener, KeyListener {
         lives = 3;
         score = 0;
         gameOver = false;
+        newHighScore = false;
         gameLoop.start();
     }
 
@@ -246,6 +258,14 @@ public class PacmanController implements ActionListener, KeyListener {
 
     public boolean isGameOver() {
         return gameOver;
+    }
+
+    public boolean isNewHighScore() {
+        return newHighScore;
+    }
+
+    public int getHighScore() {
+        return scoreManager.getHighScore();
     }
 
     public Set<Block> getWalls() {

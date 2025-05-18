@@ -81,21 +81,12 @@ public class Block {
         this.velocityY = velocityY;
     }
 
-    // Getters and setters
     public int getX() {
         return x;
     }
 
-    public void setX(int x) {
-        this.x = x;
-    }
-
     public int getY() {
         return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
     }
 
     public int getSquareSize() {
@@ -117,23 +108,11 @@ public class Block {
         return type;
     }
 
-    public void setDirection(char direction) {
-        this.direction = direction;
-    }
-
     public char getDesiredDirection() {
         return desiredDirection;
     }
 
     public void setDesiredDirection(char desiredDirection) {
         this.desiredDirection = desiredDirection;
-    }
-
-    public int getVelocityX() {
-        return velocityX;
-    }
-
-    public int getVelocityY() {
-        return velocityY;
     }
 }

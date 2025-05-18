@@ -1,7 +1,9 @@
 package com.glebestraikh.jpacman.model;
 
+import com.glebestraikh.jpacman.util.PacmanConfigurationException;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import java.net.URL;
 
 public class GameSprites {
     private Image wallImage;
@@ -39,35 +41,42 @@ public class GameSprites {
     }
 
     private void loadImages() {
-        wallImage = new ImageIcon(getClass().getResource("/sprite/wall.png")).getImage();
+        wallImage = loadImage("/sprite/wall.png");
+        pelletImage = loadImage("/sprite/pellet.png");
 
-        pelletImage = new ImageIcon(getClass().getResource("/sprite/pellet.png")).getImage();
+        blueUpGhostImage = loadImage("/sprite/blueGhost/blueGhostUp.png");
+        blueGhostDownImage = loadImage("/sprite/blueGhost/blueGhostDown.png");
+        blueGhostLeftImage = loadImage("/sprite/blueGhost/blueGhostLeft.png");
+        blueGhostRightImage = loadImage("/sprite/blueGhost/blueGhostRight.png");
 
-        blueUpGhostImage = new ImageIcon(getClass().getResource("/sprite/blueGhost/blueGhostUp.png")).getImage();
-        blueGhostDownImage = new ImageIcon(getClass().getResource("/sprite/blueGhost/blueGhostDown.png")).getImage();
-        blueGhostLeftImage = new ImageIcon(getClass().getResource("/sprite/blueGhost/blueGhostLeft.png")).getImage();
-        blueGhostRightImage = new ImageIcon(getClass().getResource("/sprite/blueGhost/blueGhostRight.png")).getImage();
+        orangeUpGhostImage = loadImage("/sprite/orangeGhost/orangeGhostUp.png");
+        orangeGhostDownImage = loadImage("/sprite/orangeGhost/orangeGhostDown.png");
+        orangeGhostLeftImage = loadImage("/sprite/orangeGhost/orangeGhostLeft.png");
+        orangeGhostRightImage = loadImage("/sprite/orangeGhost/orangeGhostRight.png");
 
-        orangeUpGhostImage = new ImageIcon(getClass().getResource("/sprite/orangeGhost/orangeGhostUp.png")).getImage();
-        orangeGhostDownImage = new ImageIcon(getClass().getResource("/sprite/orangeGhost/orangeGhostDown.png")).getImage();
-        orangeGhostLeftImage = new ImageIcon(getClass().getResource("/sprite/orangeGhost/orangeGhostLeft.png")).getImage();
-        orangeGhostRightImage = new ImageIcon(getClass().getResource("/sprite/orangeGhost/orangeGhostRight.png")).getImage();
+        pinkUpGhostImage = loadImage("/sprite/pinkGhost/pinkGhostUp.png");
+        pinkGhostDownImage = loadImage("/sprite/pinkGhost/pinkGhostDown.png");
+        pinkGhostLeftImage = loadImage("/sprite/pinkGhost/pinkGhostLeft.png");
+        pinkGhostRightImage = loadImage("/sprite/pinkGhost/pinkGhostRight.png");
 
-        pinkUpGhostImage = new ImageIcon(getClass().getResource("/sprite/pinkGhost/pinkGhostUp.png")).getImage();
-        pinkGhostDownImage = new ImageIcon(getClass().getResource("/sprite/pinkGhost/pinkGhostDown.png")).getImage();
-        pinkGhostLeftImage = new ImageIcon(getClass().getResource("/sprite/pinkGhost/pinkGhostLeft.png")).getImage();
-        pinkGhostRightImage = new ImageIcon(getClass().getResource("/sprite/pinkGhost/pinkGhostRight.png")).getImage();
+        redUpGhostImage = loadImage("/sprite/redGhost/redGhostUp.png");
+        redGhostDownImage = loadImage("/sprite/redGhost/redGhostDown.png");
+        redGhostLeftImage = loadImage("/sprite/redGhost/redGhostLeft.png");
+        redGhostRightImage = loadImage("/sprite/redGhost/redGhostRight.png");
 
-        redUpGhostImage = new ImageIcon(getClass().getResource("/sprite/redGhost/redGhostUp.png")).getImage();
-        redGhostDownImage = new ImageIcon(getClass().getResource("/sprite/redGhost/redGhostDown.png")).getImage();
-        redGhostLeftImage = new ImageIcon(getClass().getResource("/sprite/redGhost/redGhostLeft.png")).getImage();
-        redGhostRightImage = new ImageIcon(getClass().getResource("/sprite/redGhost/redGhostRight.png")).getImage();
+        pacmanOpenUpImage = loadImage("/sprite/pacman/pacmanUp.png");
+        pacmanOpenDownImage = loadImage("/sprite/pacman/pacmanDown.png");
+        pacmanOpenLeftImage = loadImage("/sprite/pacman/pacmanLeft.png");
+        pacmanOpenRightImage = loadImage("/sprite/pacman/pacmanRight.png");
+        pacmanClosedImage = loadImage("/sprite/pacman/pacmanClosed.png");
+    }
 
-        pacmanOpenUpImage = new ImageIcon(getClass().getResource("/sprite/pacman/pacmanUp.png")).getImage();
-        pacmanOpenDownImage = new ImageIcon(getClass().getResource("/sprite/pacman/pacmanDown.png")).getImage();
-        pacmanOpenLeftImage = new ImageIcon(getClass().getResource("/sprite/pacman/pacmanLeft.png")).getImage();
-        pacmanOpenRightImage = new ImageIcon(getClass().getResource("/sprite/pacman/pacmanRight.png")).getImage();
-        pacmanClosedImage = new ImageIcon(getClass().getResource("/sprite/pacman/pacmanClosed.png")).getImage();
+    private Image loadImage(String path) {
+        URL resource = getClass().getResource(path);
+        if (resource == null) {
+            throw new PacmanConfigurationException("Could not load image resource: " + path);
+        }
+        return new ImageIcon(resource).getImage();
     }
 
     // Getters
@@ -102,7 +111,7 @@ public class GameSprites {
                 return redGhostRightImage;
 
             default:
-                return null;
+                throw new PacmanConfigurationException("Unknown ghost type: " + ghostType);
         }
     }
 
@@ -120,7 +129,7 @@ public class GameSprites {
             case 'D' -> pacmanOpenDownImage;
             case 'L' -> pacmanOpenLeftImage;
             case 'R' -> pacmanOpenRightImage;
-            default -> null;
+            default -> throw new PacmanConfigurationException("Unknown pacman direction: " + direction);
         };
     }
 }
