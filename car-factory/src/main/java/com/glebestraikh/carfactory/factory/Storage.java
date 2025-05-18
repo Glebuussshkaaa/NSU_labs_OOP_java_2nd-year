@@ -45,7 +45,7 @@ public class Storage<T extends Product> extends Subject {
         }
 
         synchronized (products) {
-            while (isFull() && Thread.currentThread().isAlive()) {
+            if (isFull()) {
                 try {
                     products.wait();
                 } catch (InterruptedException e) {
@@ -53,18 +53,21 @@ public class Storage<T extends Product> extends Subject {
                 }
             }
 
+            if (isFull()) {
+                return;
+            }
+
             products.add(product);
             producedProductCount++;
 
             products.notifyAll();
-
             notifyObservers(new StorageContext(getCurrentProductCount(), producedProductCount));
         }
     }
 
     public T takeProduct() {
         synchronized (products) {
-            while (isEmpty() && Thread.currentThread().isAlive()) {
+            if (isEmpty()) {
                 try {
                     products.wait();
                 } catch (InterruptedException e) {
@@ -72,10 +75,13 @@ public class Storage<T extends Product> extends Subject {
                 }
             }
 
+            if (isEmpty()) {
+                return null;
+            }
+
             T product = products.remove();
 
             products.notifyAll();
-
             notifyObservers(new StorageContext(getCurrentProductCount(), producedProductCount));
 
             return product;
