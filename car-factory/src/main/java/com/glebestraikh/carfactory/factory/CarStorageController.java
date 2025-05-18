@@ -11,7 +11,6 @@ import com.glebestraikh.carfactory.observer.Observer;
 import com.glebestraikh.carfactory.observer.StorageContext;
 
 public class CarStorageController implements Observer {
-    private static final float OCCUPANCY_PERCENTAGE = 0.75F;
     private final Storage<Engine> engineStorage;
     private final Storage<Body> bodyStorage;
     private final Storage<Accessory> accessoryStorage;
@@ -44,13 +43,22 @@ public class CarStorageController implements Observer {
     }
 
     private void evaluateStorageStatus(int currentCarCount, int carStorageCapacity) {
-        int minCarCount = (int) (carStorageCapacity * OCCUPANCY_PERCENTAGE);
+        int minCarCount = (int) (carStorageCapacity * getDynamicOccupancyThreshold());
         int assemblingCarCount = workerDepartment.getQueueSize();
 
         if (currentCarCount + assemblingCarCount < minCarCount) {
             for (int i = 0; i < carStorageCapacity - currentCarCount - assemblingCarCount; ++i) {
                 assembleCar();
             }
+        }
+    }
+
+    private float getDynamicOccupancyThreshold() {
+        int queueSize = workerDepartment.getQueueSize();
+        if (queueSize > 10) {
+            return 0.9F;
+        } else {
+            return 0.75F;
         }
     }
 }

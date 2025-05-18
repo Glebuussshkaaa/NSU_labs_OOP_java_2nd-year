@@ -1,12 +1,12 @@
 package com.glebestraikh.carfactory.factory;
 
 import com.glebestraikh.carfactory.factory.product.Product;
-import com.glebestraikh.carfactory.observer.Observable;
+import com.glebestraikh.carfactory.observer.Subject;
 import com.glebestraikh.carfactory.observer.StorageContext;
 
 import java.util.ArrayDeque;
 
-public class Storage<T extends Product> extends Observable {
+public class Storage<T extends Product> extends Subject {
 
     private final ArrayDeque<T> products;
     private final int capacity;

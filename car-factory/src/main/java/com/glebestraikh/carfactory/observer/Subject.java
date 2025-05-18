@@ -3,7 +3,7 @@ package com.glebestraikh.carfactory.observer;
 import java.util.Set;
 import java.util.HashSet;
 
-public class Observable {
+public class Subject {
     private Set<Observer> observers;
 
     public void addObserver(Observer observer) {
