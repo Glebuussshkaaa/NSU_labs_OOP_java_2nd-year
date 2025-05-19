@@ -5,12 +5,10 @@ import com.glebestraikh.carfactory.threadpool.Task;
 import com.glebestraikh.carfactory.threadpool.ThreadPool;
 
 public class WorkerDepartment {
-    private final ThreadPool threadPool = new ThreadPool();
+    private final ThreadPool threadPool;
 
     public WorkerDepartment(int workerCount) {
-        for (int i = 0; i < workerCount; ++i) {
-            threadPool.addThread(new Worker());
-        }
+        threadPool = new ThreadPool(workerCount, Worker::new);
     }
 
     public int getQueueSize() {

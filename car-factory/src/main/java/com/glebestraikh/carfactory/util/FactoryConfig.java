@@ -54,10 +54,6 @@ public class FactoryConfig {
         return parseInt(properties.getProperty("CarStorageCapacity"));
     }
 
-    public static int getAccessorySupplierCount() {
-        return parseInt(properties.getProperty("NumberOfAccessorySuppliers"));
-    }
-
     public static int getWorkerCount() {
         return parseInt(properties.getProperty("NumberOfWorkers"));
     }

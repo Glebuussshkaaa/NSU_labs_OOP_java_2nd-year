@@ -10,7 +10,7 @@ public class Dealer extends Thread {
     private static final Logger logger = Logger.getLogger(Dealer.class.getName());
     private final long id = IdGenerator.nextId(Dealer.class);
     private final Storage<Car> carStorage;
-    private volatile Integer saleTime;
+    private Integer saleTime;
 
     public Dealer(Storage<Car> carStorage) {
         this.carStorage = carStorage;

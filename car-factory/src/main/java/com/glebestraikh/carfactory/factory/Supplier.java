@@ -12,7 +12,7 @@ public class Supplier<T extends Detail> extends Thread {
     private final long id = IdGenerator.nextId(Supplier.class);
     private final Storage<T> storage;
     private final Class<T> detailClass;
-    private volatile Integer productionTime;
+    private Integer productionTime;
 
     public Supplier(Storage<T> storage, Class<T> detailClass) {
         this.storage = storage;

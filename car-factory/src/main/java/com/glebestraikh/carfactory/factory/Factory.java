@@ -22,7 +22,7 @@ public class Factory {
 
     private final Supplier<Engine> engineSupplier;
     private final Supplier<Body> bodySupplier;
-    private final List<Supplier<Accessory>> accessorySuppliers;
+    private final Supplier<Accessory> accessorySupplier;
 
     private final WorkerDepartment workerDepartment;
     private final List<Dealer> dealers;
@@ -37,10 +37,7 @@ public class Factory {
         logger.info("Create suppliers");
         engineSupplier = new Supplier<>(engineStorage, Engine.class);
         bodySupplier = new Supplier<>(bodyStorage, Body.class);
-        accessorySuppliers = new ArrayList<>();
-        for (int i = 0; i < FactoryConfig.getAccessorySupplierCount(); ++i) {
-            accessorySuppliers.add(new Supplier<>(accessoryStorage, Accessory.class));
-        }
+        accessorySupplier = new Supplier<>(accessoryStorage, Accessory.class);
 
         logger.info("Create worker department");
         workerDepartment = new WorkerDepartment(FactoryConfig.getWorkerCount());
@@ -60,9 +57,7 @@ public class Factory {
         logger.info("Start factory");
         engineSupplier.start();
         bodySupplier.start();
-        for (Supplier<Accessory> accessorySupplier : accessorySuppliers) {
-            accessorySupplier.start();
-        }
+        accessorySupplier.start();
         workerDepartment.start();
         for (Dealer dealer : dealers) {
             dealer.start();
@@ -76,9 +71,7 @@ public class Factory {
         workerDepartment.stop();
         engineSupplier.interrupt();
         bodySupplier.interrupt();
-        for (Supplier<Accessory> accessorySupplier : accessorySuppliers) {
-            accessorySupplier.interrupt();
-        }
+        accessorySupplier.interrupt();
 
         logger.info("Stop factory");
     }
@@ -92,9 +85,7 @@ public class Factory {
     }
 
     public void setAccessoryProductionTime(int productionTime) {
-        for (Supplier<Accessory> accessorySupplier : accessorySuppliers) {
             accessorySupplier.setProductionTime(productionTime);
-        }
     }
 
     public void setCarSaleTime(int saleTime) {

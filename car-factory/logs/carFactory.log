@@ -1,138 +1,210 @@
-мая 19, 2025 3:02:17 AM com.glebestraikh.carfactory.factory.Factory <init>
+мая 19, 2025 1:56:05 PM com.glebestraikh.carfactory.factory.Factory <init>
 INFO: Create storages
-мая 19, 2025 3:02:17 AM com.glebestraikh.carfactory.util.FactoryConfig <clinit>
+мая 19, 2025 1:56:05 PM com.glebestraikh.carfactory.util.FactoryConfig <clinit>
 INFO: Read configuration file with factory settings
-мая 19, 2025 3:02:17 AM com.glebestraikh.carfactory.factory.Factory <init>
+мая 19, 2025 1:56:05 PM com.glebestraikh.carfactory.factory.Factory <init>
 INFO: Create suppliers
-мая 19, 2025 3:02:17 AM com.glebestraikh.carfactory.factory.Factory <init>
+мая 19, 2025 1:56:05 PM com.glebestraikh.carfactory.factory.Factory <init>
 INFO: Create worker department
-мая 19, 2025 3:02:17 AM com.glebestraikh.carfactory.factory.Factory <init>
+мая 19, 2025 1:56:05 PM com.glebestraikh.carfactory.factory.Factory <init>
 INFO: Create controller for car storage
-мая 19, 2025 3:02:17 AM com.glebestraikh.carfactory.factory.Factory <init>
+мая 19, 2025 1:56:05 PM com.glebestraikh.carfactory.factory.Factory <init>
 INFO: Create dealers
-мая 19, 2025 3:02:17 AM com.glebestraikh.carfactory.factory.Factory start
+мая 19, 2025 1:56:05 PM com.glebestraikh.carfactory.factory.Factory start
 INFO: Start factory
-мая 19, 2025 3:02:22 AM com.glebestraikh.carfactory.factory.Supplier run
+мая 19, 2025 1:56:10 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <3> delivered Accessory <1>
+мая 19, 2025 1:56:10 PM com.glebestraikh.carfactory.factory.Supplier run
 INFO: Supplier <2> delivered Body <1>
-мая 19, 2025 3:02:22 AM com.glebestraikh.carfactory.factory.Supplier run
-INFO: Supplier <5> delivered Accessory <5>
-мая 19, 2025 3:02:22 AM com.glebestraikh.carfactory.factory.Supplier run
-INFO: Supplier <6> delivered Accessory <1>
-мая 19, 2025 3:02:22 AM com.glebestraikh.carfactory.factory.Supplier run
+мая 19, 2025 1:56:10 PM com.glebestraikh.carfactory.factory.Supplier run
 INFO: Supplier <1> delivered Engine <1>
-мая 19, 2025 3:02:22 AM com.glebestraikh.carfactory.factory.Supplier run
-INFO: Supplier <7> delivered Accessory <4>
-мая 19, 2025 3:02:22 AM com.glebestraikh.carfactory.factory.Supplier run
-INFO: Supplier <3> delivered Accessory <3>
-мая 19, 2025 3:02:22 AM com.glebestraikh.carfactory.factory.Supplier run
-INFO: Supplier <4> delivered Accessory <2>
-мая 19, 2025 3:02:22 AM com.glebestraikh.carfactory.factory.worker.AssemblingTask execute
+мая 19, 2025 1:56:10 PM com.glebestraikh.carfactory.factory.worker.AssemblingTask execute
 INFO: Worker <1> assembled Car <1> (Engine <1>, Body <1>, Accessory <1>)
-мая 19, 2025 3:02:22 AM com.glebestraikh.carfactory.factory.Dealer run
+мая 19, 2025 1:56:10 PM com.glebestraikh.carfactory.factory.Dealer run
 INFO: Dealer <1> bought Car <1> (Engine <1>, Body <1>, Accessory <1>)
-мая 19, 2025 3:02:27 AM com.glebestraikh.carfactory.factory.Supplier run
+мая 19, 2025 1:56:15 PM com.glebestraikh.carfactory.factory.Supplier run
 INFO: Supplier <2> delivered Body <2>
-мая 19, 2025 3:02:27 AM com.glebestraikh.carfactory.factory.Supplier run
+мая 19, 2025 1:56:15 PM com.glebestraikh.carfactory.factory.Dealer run
+INFO: Dealer <2> bought Car <2> (Engine <2>, Body <2>, Accessory <2>)
+мая 19, 2025 1:56:15 PM com.glebestraikh.carfactory.factory.Supplier run
 INFO: Supplier <1> delivered Engine <2>
-мая 19, 2025 3:02:27 AM com.glebestraikh.carfactory.factory.worker.AssemblingTask execute
-INFO: Worker <1> assembled Car <2> (Engine <2>, Body <2>, Accessory <3>)
-мая 19, 2025 3:02:27 AM com.glebestraikh.carfactory.factory.Supplier run
-INFO: Supplier <6> delivered Accessory <6>
-мая 19, 2025 3:02:27 AM com.glebestraikh.carfactory.factory.Supplier run
-INFO: Supplier <5> delivered Accessory <7>
-мая 19, 2025 3:02:27 AM com.glebestraikh.carfactory.factory.Supplier run
-INFO: Supplier <7> delivered Accessory <8>
-мая 19, 2025 3:02:27 AM com.glebestraikh.carfactory.factory.Dealer run
-INFO: Dealer <2> bought Car <2> (Engine <2>, Body <2>, Accessory <3>)
-мая 19, 2025 3:02:27 AM com.glebestraikh.carfactory.factory.Supplier run
-INFO: Supplier <3> delivered Accessory <9>
-мая 19, 2025 3:02:27 AM com.glebestraikh.carfactory.factory.Supplier run
-INFO: Supplier <4> delivered Accessory <10>
-мая 19, 2025 3:02:32 AM com.glebestraikh.carfactory.factory.Supplier run
-INFO: Supplier <2> delivered Body <3>
-мая 19, 2025 3:02:32 AM com.glebestraikh.carfactory.factory.Supplier run
+мая 19, 2025 1:56:15 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <3> delivered Accessory <2>
+мая 19, 2025 1:56:15 PM com.glebestraikh.carfactory.factory.worker.AssemblingTask execute
+INFO: Worker <3> assembled Car <2> (Engine <2>, Body <2>, Accessory <2>)
+мая 19, 2025 1:56:20 PM com.glebestraikh.carfactory.factory.Supplier run
 INFO: Supplier <1> delivered Engine <3>
-мая 19, 2025 3:02:32 AM com.glebestraikh.carfactory.factory.Supplier run
-INFO: Supplier <6> delivered Accessory <11>
-мая 19, 2025 3:02:32 AM com.glebestraikh.carfactory.factory.Dealer run
-INFO: Dealer <1> bought Car <3> (Engine <3>, Body <3>, Accessory <5>)
-мая 19, 2025 3:02:32 AM com.glebestraikh.carfactory.factory.Supplier run
-INFO: Supplier <5> delivered Accessory <12>
-мая 19, 2025 3:02:32 AM com.glebestraikh.carfactory.factory.worker.AssemblingTask execute
-INFO: Worker <1> assembled Car <3> (Engine <3>, Body <3>, Accessory <5>)
-мая 19, 2025 3:02:32 AM com.glebestraikh.carfactory.factory.Supplier run
-INFO: Supplier <4> delivered Accessory <14>
-мая 19, 2025 3:02:32 AM com.glebestraikh.carfactory.factory.Supplier run
-INFO: Supplier <7> delivered Accessory <13>
-мая 19, 2025 3:02:32 AM com.glebestraikh.carfactory.factory.Supplier run
-INFO: Supplier <3> delivered Accessory <15>
-мая 19, 2025 3:02:37 AM com.glebestraikh.carfactory.factory.Supplier run
-INFO: Supplier <1> delivered Engine <4>
-мая 19, 2025 3:02:37 AM com.glebestraikh.carfactory.factory.Supplier run
-INFO: Supplier <3> delivered Accessory <19>
-мая 19, 2025 3:02:37 AM com.glebestraikh.carfactory.factory.Supplier run
-INFO: Supplier <5> delivered Accessory <18>
-мая 19, 2025 3:02:37 AM com.glebestraikh.carfactory.factory.Supplier run
-INFO: Supplier <6> delivered Accessory <17>
-мая 19, 2025 3:02:37 AM com.glebestraikh.carfactory.factory.Supplier run
-INFO: Supplier <4> delivered Accessory <20>
-мая 19, 2025 3:02:37 AM com.glebestraikh.carfactory.factory.Supplier run
+мая 19, 2025 1:56:20 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <2> delivered Body <3>
+мая 19, 2025 1:56:20 PM com.glebestraikh.carfactory.factory.worker.AssemblingTask execute
+INFO: Worker <1> assembled Car <3> (Engine <3>, Body <3>, Accessory <3>)
+мая 19, 2025 1:56:20 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <3> delivered Accessory <3>
+мая 19, 2025 1:56:20 PM com.glebestraikh.carfactory.factory.Dealer run
+INFO: Dealer <1> bought Car <3> (Engine <3>, Body <3>, Accessory <3>)
+мая 19, 2025 1:56:25 PM com.glebestraikh.carfactory.factory.Supplier run
 INFO: Supplier <2> delivered Body <4>
-мая 19, 2025 3:02:37 AM com.glebestraikh.carfactory.factory.worker.AssemblingTask execute
-INFO: Worker <3> assembled Car <4> (Engine <4>, Body <4>, Accessory <6>)
-мая 19, 2025 3:02:37 AM com.glebestraikh.carfactory.factory.Dealer run
-INFO: Dealer <2> bought Car <4> (Engine <4>, Body <4>, Accessory <6>)
-мая 19, 2025 3:02:37 AM com.glebestraikh.carfactory.factory.Supplier run
-INFO: Supplier <7> delivered Accessory <16>
-мая 19, 2025 3:02:42 AM com.glebestraikh.carfactory.factory.Supplier run
-INFO: Supplier <1> delivered Engine <5>
-мая 19, 2025 3:02:42 AM com.glebestraikh.carfactory.factory.Supplier run
-INFO: Supplier <3> delivered Accessory <21>
-мая 19, 2025 3:02:42 AM com.glebestraikh.carfactory.factory.Supplier run
-INFO: Supplier <4> delivered Accessory <24>
-мая 19, 2025 3:02:42 AM com.glebestraikh.carfactory.factory.Supplier run
+мая 19, 2025 1:56:25 PM com.glebestraikh.carfactory.factory.worker.AssemblingTask execute
+INFO: Worker <3> assembled Car <4> (Engine <4>, Body <4>, Accessory <4>)
+мая 19, 2025 1:56:25 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <1> delivered Engine <4>
+мая 19, 2025 1:56:25 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <3> delivered Accessory <4>
+мая 19, 2025 1:56:25 PM com.glebestraikh.carfactory.factory.Dealer run
+INFO: Dealer <2> bought Car <4> (Engine <4>, Body <4>, Accessory <4>)
+мая 19, 2025 1:56:30 PM com.glebestraikh.carfactory.factory.Supplier run
 INFO: Supplier <2> delivered Body <5>
-мая 19, 2025 3:02:42 AM com.glebestraikh.carfactory.factory.Supplier run
-INFO: Supplier <5> delivered Accessory <22>
-мая 19, 2025 3:02:42 AM com.glebestraikh.carfactory.factory.Supplier run
-INFO: Supplier <7> delivered Accessory <25>
-мая 19, 2025 3:02:42 AM com.glebestraikh.carfactory.factory.Supplier run
-INFO: Supplier <6> delivered Accessory <23>
-мая 19, 2025 3:02:42 AM com.glebestraikh.carfactory.factory.Dealer run
-INFO: Dealer <1> bought Car <5> (Engine <5>, Body <5>, Accessory <8>)
-мая 19, 2025 3:02:42 AM com.glebestraikh.carfactory.factory.worker.AssemblingTask execute
-INFO: Worker <3> assembled Car <5> (Engine <5>, Body <5>, Accessory <8>)
-мая 19, 2025 3:02:47 AM com.glebestraikh.carfactory.factory.Supplier run
+мая 19, 2025 1:56:30 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <3> delivered Accessory <5>
+мая 19, 2025 1:56:30 PM com.glebestraikh.carfactory.factory.Dealer run
+INFO: Dealer <1> bought Car <5> (Engine <5>, Body <5>, Accessory <5>)
+мая 19, 2025 1:56:30 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <1> delivered Engine <5>
+мая 19, 2025 1:56:30 PM com.glebestraikh.carfactory.factory.worker.AssemblingTask execute
+INFO: Worker <1> assembled Car <5> (Engine <5>, Body <5>, Accessory <5>)
+мая 19, 2025 1:56:35 PM com.glebestraikh.carfactory.factory.Supplier run
 INFO: Supplier <2> delivered Body <6>
-мая 19, 2025 3:02:47 AM com.glebestraikh.carfactory.factory.Supplier run
+мая 19, 2025 1:56:35 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <3> delivered Accessory <6>
+мая 19, 2025 1:56:35 PM com.glebestraikh.carfactory.factory.Supplier run
 INFO: Supplier <1> delivered Engine <6>
-мая 19, 2025 3:02:47 AM com.glebestraikh.carfactory.factory.worker.AssemblingTask execute
-INFO: Worker <1> assembled Car <6> (Engine <6>, Body <6>, Accessory <10>)
-мая 19, 2025 3:02:47 AM com.glebestraikh.carfactory.factory.Supplier run
-INFO: Supplier <4> delivered Accessory <26>
-мая 19, 2025 3:02:47 AM com.glebestraikh.carfactory.factory.Dealer run
-INFO: Dealer <1> bought Car <6> (Engine <6>, Body <6>, Accessory <10>)
-мая 19, 2025 3:02:52 AM com.glebestraikh.carfactory.factory.Supplier run
-INFO: Supplier <1> delivered Engine <7>
-мая 19, 2025 3:02:52 AM com.glebestraikh.carfactory.factory.Supplier run
+мая 19, 2025 1:56:35 PM com.glebestraikh.carfactory.factory.worker.AssemblingTask execute
+INFO: Worker <3> assembled Car <6> (Engine <6>, Body <6>, Accessory <6>)
+мая 19, 2025 1:56:35 PM com.glebestraikh.carfactory.factory.Dealer run
+INFO: Dealer <2> bought Car <6> (Engine <6>, Body <6>, Accessory <6>)
+мая 19, 2025 1:56:36 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <3> delivered Accessory <7>
+мая 19, 2025 1:56:37 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <3> delivered Accessory <8>
+мая 19, 2025 1:56:38 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <3> delivered Accessory <9>
+мая 19, 2025 1:56:39 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <3> delivered Accessory <10>
+мая 19, 2025 1:56:40 PM com.glebestraikh.carfactory.factory.Supplier run
 INFO: Supplier <2> delivered Body <7>
-мая 19, 2025 3:02:52 AM com.glebestraikh.carfactory.factory.Supplier run
-INFO: Supplier <7> delivered Accessory <27>
-мая 19, 2025 3:02:52 AM com.glebestraikh.carfactory.factory.Supplier run
-INFO: Supplier <4> delivered Accessory <31>
-мая 19, 2025 3:02:52 AM com.glebestraikh.carfactory.factory.Supplier run
-INFO: Supplier <5> delivered Accessory <30>
-мая 19, 2025 3:02:52 AM com.glebestraikh.carfactory.factory.worker.AssemblingTask execute
-INFO: Worker <1> assembled Car <7> (Engine <7>, Body <7>, Accessory <11>)
-мая 19, 2025 3:02:52 AM com.glebestraikh.carfactory.factory.Supplier run
-INFO: Supplier <6> delivered Accessory <28>
-мая 19, 2025 3:02:52 AM com.glebestraikh.carfactory.factory.Supplier run
+мая 19, 2025 1:56:40 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <1> delivered Engine <7>
+мая 19, 2025 1:56:40 PM com.glebestraikh.carfactory.factory.worker.AssemblingTask execute
+INFO: Worker <1> assembled Car <7> (Engine <7>, Body <7>, Accessory <7>)
+мая 19, 2025 1:56:40 PM com.glebestraikh.carfactory.factory.Dealer run
+INFO: Dealer <2> bought Car <7> (Engine <7>, Body <7>, Accessory <7>)
+мая 19, 2025 1:56:40 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <3> delivered Accessory <11>
+мая 19, 2025 1:56:41 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <3> delivered Accessory <12>
+мая 19, 2025 1:56:42 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <3> delivered Accessory <13>
+мая 19, 2025 1:56:43 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <3> delivered Accessory <14>
+мая 19, 2025 1:56:44 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <3> delivered Accessory <15>
+мая 19, 2025 1:56:45 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <2> delivered Body <8>
+мая 19, 2025 1:56:45 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <1> delivered Engine <8>
+мая 19, 2025 1:56:45 PM com.glebestraikh.carfactory.factory.worker.AssemblingTask execute
+INFO: Worker <3> assembled Car <8> (Engine <8>, Body <8>, Accessory <8>)
+мая 19, 2025 1:56:45 PM com.glebestraikh.carfactory.factory.Dealer run
+INFO: Dealer <1> bought Car <8> (Engine <8>, Body <8>, Accessory <8>)
+мая 19, 2025 1:56:45 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <3> delivered Accessory <16>
+мая 19, 2025 1:56:46 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <3> delivered Accessory <17>
+мая 19, 2025 1:56:47 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <3> delivered Accessory <18>
+мая 19, 2025 1:56:48 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <3> delivered Accessory <19>
+мая 19, 2025 1:56:49 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <3> delivered Accessory <20>
+мая 19, 2025 1:56:50 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <2> delivered Body <9>
+мая 19, 2025 1:56:50 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <1> delivered Engine <9>
+мая 19, 2025 1:56:50 PM com.glebestraikh.carfactory.factory.worker.AssemblingTask execute
+INFO: Worker <1> assembled Car <9> (Engine <9>, Body <9>, Accessory <9>)
+мая 19, 2025 1:56:50 PM com.glebestraikh.carfactory.factory.Dealer run
+INFO: Dealer <2> bought Car <9> (Engine <9>, Body <9>, Accessory <9>)
+мая 19, 2025 1:56:50 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <3> delivered Accessory <21>
+мая 19, 2025 1:56:51 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <3> delivered Accessory <22>
+мая 19, 2025 1:56:52 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <3> delivered Accessory <23>
+мая 19, 2025 1:56:53 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <3> delivered Accessory <24>
+мая 19, 2025 1:56:54 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <3> delivered Accessory <25>
+мая 19, 2025 1:56:55 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <2> delivered Body <10>
+мая 19, 2025 1:56:55 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <1> delivered Engine <10>
+мая 19, 2025 1:56:55 PM com.glebestraikh.carfactory.factory.worker.AssemblingTask execute
+INFO: Worker <3> assembled Car <10> (Engine <10>, Body <10>, Accessory <10>)
+мая 19, 2025 1:56:55 PM com.glebestraikh.carfactory.factory.Dealer run
+INFO: Dealer <1> bought Car <10> (Engine <10>, Body <10>, Accessory <10>)
+мая 19, 2025 1:56:55 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <3> delivered Accessory <26>
+мая 19, 2025 1:56:56 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <3> delivered Accessory <27>
+мая 19, 2025 1:56:57 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <3> delivered Accessory <28>
+мая 19, 2025 1:56:58 PM com.glebestraikh.carfactory.factory.Supplier run
 INFO: Supplier <3> delivered Accessory <29>
-мая 19, 2025 3:02:52 AM com.glebestraikh.carfactory.factory.Dealer run
-INFO: Dealer <2> bought Car <7> (Engine <7>, Body <7>, Accessory <11>)
-мая 19, 2025 3:02:54 AM com.glebestraikh.carfactory.factory.Factory stop
+мая 19, 2025 1:56:59 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <3> delivered Accessory <30>
+мая 19, 2025 1:57:00 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <2> delivered Body <11>
+мая 19, 2025 1:57:00 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <1> delivered Engine <11>
+мая 19, 2025 1:57:00 PM com.glebestraikh.carfactory.factory.worker.AssemblingTask execute
+INFO: Worker <1> assembled Car <11> (Engine <11>, Body <11>, Accessory <11>)
+мая 19, 2025 1:57:00 PM com.glebestraikh.carfactory.factory.Dealer run
+INFO: Dealer <2> bought Car <11> (Engine <11>, Body <11>, Accessory <11>)
+мая 19, 2025 1:57:00 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <3> delivered Accessory <31>
+мая 19, 2025 1:57:05 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <2> delivered Body <12>
+мая 19, 2025 1:57:05 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <1> delivered Engine <12>
+мая 19, 2025 1:57:05 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <3> delivered Accessory <32>
+мая 19, 2025 1:57:05 PM com.glebestraikh.carfactory.factory.worker.AssemblingTask execute
+INFO: Worker <3> assembled Car <12> (Engine <12>, Body <12>, Accessory <12>)
+мая 19, 2025 1:57:05 PM com.glebestraikh.carfactory.factory.Dealer run
+INFO: Dealer <1> bought Car <12> (Engine <12>, Body <12>, Accessory <12>)
+мая 19, 2025 1:57:10 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <2> delivered Body <13>
+мая 19, 2025 1:57:10 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <1> delivered Engine <13>
+мая 19, 2025 1:57:10 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <3> delivered Accessory <33>
+мая 19, 2025 1:57:10 PM com.glebestraikh.carfactory.factory.worker.AssemblingTask execute
+INFO: Worker <1> assembled Car <13> (Engine <13>, Body <13>, Accessory <13>)
+мая 19, 2025 1:57:10 PM com.glebestraikh.carfactory.factory.Dealer run
+INFO: Dealer <2> bought Car <13> (Engine <13>, Body <13>, Accessory <13>)
+мая 19, 2025 1:57:15 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <2> delivered Body <14>
+мая 19, 2025 1:57:15 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <1> delivered Engine <14>
+мая 19, 2025 1:57:15 PM com.glebestraikh.carfactory.factory.Dealer run
+INFO: Dealer <1> bought Car <14> (Engine <14>, Body <14>, Accessory <14>)
+мая 19, 2025 1:57:15 PM com.glebestraikh.carfactory.factory.worker.AssemblingTask execute
+INFO: Worker <3> assembled Car <14> (Engine <14>, Body <14>, Accessory <14>)
+мая 19, 2025 1:57:15 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <3> delivered Accessory <34>
+мая 19, 2025 1:57:20 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <2> delivered Body <15>
+мая 19, 2025 1:57:20 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <1> delivered Engine <15>
+мая 19, 2025 1:57:20 PM com.glebestraikh.carfactory.factory.worker.AssemblingTask execute
+INFO: Worker <1> assembled Car <15> (Engine <15>, Body <15>, Accessory <15>)
+мая 19, 2025 1:57:20 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <3> delivered Accessory <35>
+мая 19, 2025 1:57:20 PM com.glebestraikh.carfactory.factory.Dealer run
+INFO: Dealer <2> bought Car <15> (Engine <15>, Body <15>, Accessory <15>)
+мая 19, 2025 1:57:22 PM com.glebestraikh.carfactory.factory.Factory stop
 INFO: Stop factory
-мая 19, 2025 3:02:54 AM com.glebestraikh.carfactory.factory.Supplier run
+мая 19, 2025 1:57:22 PM com.glebestraikh.carfactory.factory.Supplier run
 SEVERE: Error during product creation
 java.lang.InterruptedException: sleep interrupted
 	at java.base/java.lang.Thread.sleepNanos0(Native Method)
@@ -140,47 +212,9 @@ java.lang.InterruptedException: sleep interrupted
 	at java.base/java.lang.Thread.sleep(Thread.java:522)
 	at com.glebestraikh.carfactory.factory.Supplier.run(Supplier.java:40)
 
-мая 19, 2025 3:02:54 AM com.glebestraikh.carfactory.factory.Supplier run
-SEVERE: Error during product creation
-java.lang.InterruptedException: sleep interrupted
-	at java.base/java.lang.Thread.sleepNanos0(Native Method)
-	at java.base/java.lang.Thread.sleepNanos(Thread.java:491)
-	at java.base/java.lang.Thread.sleep(Thread.java:522)
-	at com.glebestraikh.carfactory.factory.Supplier.run(Supplier.java:40)
-
-мая 19, 2025 3:02:54 AM com.glebestraikh.carfactory.factory.Supplier run
-SEVERE: Error during product creation
-java.lang.InterruptedException: sleep interrupted
-	at java.base/java.lang.Thread.sleepNanos0(Native Method)
-	at java.base/java.lang.Thread.sleepNanos(Thread.java:491)
-	at java.base/java.lang.Thread.sleep(Thread.java:522)
-	at com.glebestraikh.carfactory.factory.Supplier.run(Supplier.java:40)
-
-мая 19, 2025 3:02:54 AM com.glebestraikh.carfactory.factory.Supplier run
-SEVERE: Error during product creation
-java.lang.InterruptedException: sleep interrupted
-	at java.base/java.lang.Thread.sleepNanos0(Native Method)
-	at java.base/java.lang.Thread.sleepNanos(Thread.java:491)
-	at java.base/java.lang.Thread.sleep(Thread.java:522)
-	at com.glebestraikh.carfactory.factory.Supplier.run(Supplier.java:40)
-
-мая 19, 2025 3:02:54 AM com.glebestraikh.carfactory.factory.Supplier run
-SEVERE: Error during product creation
-java.lang.InterruptedException: sleep interrupted
-	at java.base/java.lang.Thread.sleepNanos0(Native Method)
-	at java.base/java.lang.Thread.sleepNanos(Thread.java:491)
-	at java.base/java.lang.Thread.sleep(Thread.java:522)
-	at com.glebestraikh.carfactory.factory.Supplier.run(Supplier.java:40)
-
-мая 19, 2025 3:02:54 AM com.glebestraikh.carfactory.factory.Supplier run
-SEVERE: Error during product creation
-java.lang.InterruptedException: sleep interrupted
-	at java.base/java.lang.Thread.sleepNanos0(Native Method)
-	at java.base/java.lang.Thread.sleepNanos(Thread.java:491)
-	at java.base/java.lang.Thread.sleep(Thread.java:522)
-	at com.glebestraikh.carfactory.factory.Supplier.run(Supplier.java:40)
-
-мая 19, 2025 3:02:54 AM com.glebestraikh.carfactory.factory.Supplier run
+мая 19, 2025 1:57:22 PM com.glebestraikh.carfactory.factory.Supplier run
+INFO: Supplier <3> delivered Accessory <36>
+мая 19, 2025 1:57:22 PM com.glebestraikh.carfactory.factory.Supplier run
 SEVERE: Error during product creation
 java.lang.InterruptedException: sleep interrupted
 	at java.base/java.lang.Thread.sleepNanos0(Native Method)
