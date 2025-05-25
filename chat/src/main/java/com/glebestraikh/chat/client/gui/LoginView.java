@@ -1,6 +1,6 @@
-package com.glebestraikh.chat.client.view;
+package com.glebestraikh.chat.client.gui;
 
-import com.glebestraikh.chat.client.controller.Controller;
+import com.glebestraikh.chat.client.controller.ClientController;
 import com.glebestraikh.chat.client.listener.Listener;
 import com.glebestraikh.chat.client.listener.event.ErrorEvent;
 import com.glebestraikh.chat.client.listener.event.Event;
@@ -9,7 +9,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,7 +23,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
-public class StartMenuFrame {
+public class LoginView {
     private static final String TITLE = "XChat";
     private static final String SERVER_ADDRESS_FIELD_TITLE = "Server address: ";
     private static final String SERVER_PORT_FIELD_TITLE = "Server port: ";
@@ -35,7 +34,7 @@ public class StartMenuFrame {
     private static final int POPUP_DISPLAY = 5000;
     private static final Color BACKGROUND_COLOR = new Color(15, 20, 25);           // Темно-серый фон
     private static final Color CARD_BACKGROUND_COLOR = new Color(30, 39, 46);      // Цвет карточек
-    private static final Color BUTTON_COLOR = new Color(0, 136, 204);             // Синий Telegram
+    private static final Color BUTTON_COLOR = new Color(0, 136, 204);             // Синий
     private static final Color BUTTON_HOVER_COLOR = new Color(0, 122, 184);       // Синий при наведении
     private static final Color INPUT_BACKGROUND_COLOR = new Color(45, 52, 58);    // Фон полей ввода
     private static final Color INPUT_BORDER_COLOR = new Color(85, 89, 92);        // Граница полей
@@ -54,11 +53,11 @@ public class StartMenuFrame {
     private final JTextField serverPortTextField = new JTextField();
     private final JTextField usernameTextField = new JTextField();
     private final JLabel errorMessageLabel = new JLabel();
-    private final Controller controller = new Controller();
+    private final ClientController controller = new ClientController();
     private final GridBagConstraints contentPaneConstraints = new GridBagConstraints();
-    private final StartMenuListener listener = new StartMenuListener();
+    private final LoginViewListener listener = new LoginViewListener();
 
-    public StartMenuFrame() {
+    public LoginView() {
         frame.setTitle(TITLE);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(WIDTH, HEIGHT);
@@ -115,7 +114,7 @@ public class StartMenuFrame {
         inputConstraints.gridy++;
         addModernField(SERVER_PORT_FIELD_TITLE, serverPortTextField, inputPanel, inputConstraints);
         inputConstraints.gridy++;
-        inputConstraints.insets = new Insets(0, 0, 0, 0); // Убираем отступ для последнего поля
+        inputConstraints.insets = new Insets(0, 0, 0, 0);
         addModernField(USERNAME_FIELD_TITLE, usernameTextField, inputPanel, inputConstraints);
 
         contentPaneConstraints.anchor = GridBagConstraints.CENTER;
@@ -145,7 +144,6 @@ public class StartMenuFrame {
                 BorderFactory.createEmptyBorder(12, 15, 12, 15)
         ));
 
-        // Добавляем эффекты фокуса
         textField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 textField.setBorder(BorderFactory.createCompoundBorder(
@@ -176,7 +174,6 @@ public class StartMenuFrame {
         startButton.setFocusPainted(false);
         startButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        // Добавляем эффекты наведения
         startButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 startButton.setBackground(BUTTON_HOVER_COLOR);
@@ -221,7 +218,7 @@ public class StartMenuFrame {
         ));
         errorMessageLabel.setText(message);
 
-        Timer timer = new Timer(POPUP_DISPLAY, e -> {
+        Timer timer = new Timer(POPUP_DISPLAY, _ -> {
             errorMessageLabel.setOpaque(false);
             errorMessageLabel.setBorder(BorderFactory.createEmptyBorder(12, 20, 12, 20));
             errorMessageLabel.setText(" ");
@@ -276,12 +273,12 @@ public class StartMenuFrame {
             SwingUtilities.invokeLater(() -> {
                 frame.dispose();
                 controller.removeListener(listener);
-                new WorkSpaceFrame(controller);
+                new ChatView(controller);
             });
         }
     }
 
-    private class StartMenuListener implements Listener {
+    private class LoginViewListener implements Listener {
         @Override
         public void processEvent(Event event) {
             if (event instanceof ErrorEvent) {

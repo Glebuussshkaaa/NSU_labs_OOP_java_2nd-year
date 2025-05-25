@@ -1,6 +1,6 @@
 package com.glebestraikh.chat.client.service;
 
-import com.glebestraikh.chat.client.listener.ListeningSupport;
+import com.glebestraikh.chat.client.listener.ListenerManager;
 import com.glebestraikh.chat.client.listener.event.ErrorEvent;
 import com.glebestraikh.chat.client.listener.event.LoginEvent;
 import com.glebestraikh.chat.client.listener.event.LogoutEvent;
@@ -26,14 +26,13 @@ public class DTOHandleService {
     private final Map<UUID, CompletableFuture<DTO>> requests = new ConcurrentHashMap<>();
     private final String username;
     private final Connection connection;
-    private final ListeningSupport listeningSupport;
+    private final ListenerManager listeningSupport;
 
-    public DTOHandleService(String username, Connection connection, ListeningSupport listeningSupport) {
+    public DTOHandleService(String username, Connection connection, ListenerManager listeningSupport) {
         this.username = username;
         this.connection = connection;
         this.listeningSupport = listeningSupport;
     }
-
 
     public void handle() {
         CompletableFuture.runAsync(new DTOHandleTask(), receivers);

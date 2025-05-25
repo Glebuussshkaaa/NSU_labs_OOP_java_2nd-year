@@ -1,11 +1,11 @@
 package com.glebestraikh.chat.client.controller;
 
 import com.glebestraikh.chat.client.listener.Listener;
-import com.glebestraikh.chat.client.listener.ListeningSupport;
+import com.glebestraikh.chat.client.listener.ListenerManager;
 import com.glebestraikh.chat.client.listener.event.ErrorEvent;
 import com.glebestraikh.chat.client.service.DTOHandleService;
 import com.glebestraikh.chat.client.service.UserRegistrationService;
-import com.glebestraikh.chat.server.ServerConfig;
+import com.glebestraikh.chat.util.ServerConfig;
 import com.glebestraikh.chat.server.connection.Connection;
 import com.glebestraikh.chat.server.connection.ConnectionFactory;
 import com.glebestraikh.chat.server.dto.DTO;
@@ -15,17 +15,17 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
 
-public class Controller {
-    private final ListeningSupport listeningSupport = new ListeningSupport();
+public class ClientController {
+    private final ListenerManager ListenerManager = new ListenerManager();
     private Connection connection;
     private DTOHandleService dtoHandleService;
 
     public void addListener(Listener listener) {
-        listeningSupport.addListener(listener);
+        ListenerManager.addListener(listener);
     }
 
     public void removeListener(Listener listener) {
-        listeningSupport.removeListener(listener);
+        ListenerManager.removeListener(listener);
     }
 
     public boolean connect(InetAddress serverAddress, int serverPort) {
@@ -40,7 +40,7 @@ public class Controller {
             connection = ConnectionFactory.newConnection(ServerConfig.getDTOFormat());
             connection.connect(clientSocket);
         } catch (IOException e) {
-            listeningSupport.notifyListeners(new ErrorEvent("Server is not available"));
+            ListenerManager.notifyListeners(new ErrorEvent("Server is not available"));
             return false;
         }
 
@@ -52,12 +52,12 @@ public class Controller {
             return false;
         }
 
-        UserRegistrationService registerService = new UserRegistrationService(listeningSupport);
+        UserRegistrationService registerService = new UserRegistrationService(ListenerManager);
         boolean registerResult = registerService.register(connection, username);
         registerService.shutdown();
 
         if (registerResult) {
-            dtoHandleService = new DTOHandleService(username, connection, listeningSupport);
+            dtoHandleService = new DTOHandleService(username, connection, ListenerManager);
         }
 
         return registerResult;
@@ -69,14 +69,14 @@ public class Controller {
 
     public String[] getUsers() {
         if (dtoHandleService == null) {
-            listeningSupport.notifyListeners(new ErrorEvent("Client not registered"));
+            ListenerManager.notifyListeners(new ErrorEvent("Client not registered"));
             return new String[]{};
         }
 
         DTO response = dtoHandleService.sendRequest(DTO.newUserListRequest());
 
         if (response.getSubtype() == DTO.Subtype.ERROR) {
-            listeningSupport.notifyListeners(new ErrorEvent(response.getMessage()));
+            ListenerManager.notifyListeners(new ErrorEvent(response.getMessage()));
             return new String[]{};
         }
 
@@ -85,27 +85,27 @@ public class Controller {
 
     public void sendNewMessage(String message) {
         if (dtoHandleService == null) {
-            listeningSupport.notifyListeners(new ErrorEvent("Client not registered"));
+            ListenerManager.notifyListeners(new ErrorEvent("Client not registered"));
             return;
         }
 
         DTO response = dtoHandleService.sendRequest(DTO.newNewMessageRequest(message));
 
         if (response.getSubtype() == Subtype.ERROR) {
-            listeningSupport.notifyListeners(new ErrorEvent(response.getMessage()));
+            ListenerManager.notifyListeners(new ErrorEvent(response.getMessage()));
         }
     }
 
     public void logout() {
         if (dtoHandleService == null) {
-            listeningSupport.notifyListeners(new ErrorEvent("Client not registered"));
+            ListenerManager.notifyListeners(new ErrorEvent("Client not registered"));
             return;
         }
 
         DTO response = dtoHandleService.sendRequest(DTO.newLogoutRequest());
 
         if (response.getSubtype() == Subtype.ERROR) {
-            listeningSupport.notifyListeners(new ErrorEvent(response.getMessage()));
+            ListenerManager.notifyListeners(new ErrorEvent(response.getMessage()));
         }
 
         dtoHandleService.shutdown();

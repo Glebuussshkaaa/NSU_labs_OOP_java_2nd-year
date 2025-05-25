@@ -1,4 +1,4 @@
-package com.glebestraikh.chat.server;
+package com.glebestraikh.chat.util;
 
 import com.glebestraikh.chat.server.dto.DTOFormat;
 

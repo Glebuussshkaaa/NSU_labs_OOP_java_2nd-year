@@ -1,0 +1,30 @@
+мая 25, 2025 10:49:21 PM com.glebestraikh.chat.server.service.AcceptService$AcceptTask run
+INFO: Client /127.0.0.1:50233 accepted
+мая 25, 2025 10:49:21 PM com.glebestraikh.chat.server.service.AcceptService$AcceptTask run
+INFO: Set timeout for client /127.0.0.1:50233
+мая 25, 2025 10:49:21 PM com.glebestraikh.chat.server.service.AcceptService$AcceptTask run
+INFO: Create read/write client /127.0.0.1:50233 connection
+мая 25, 2025 10:49:21 PM com.glebestraikh.chat.server.service.RegisterService$RegisterTask run
+INFO: Client /127.0.0.1:50233 is registered
+мая 25, 2025 10:49:29 PM com.glebestraikh.chat.server.service.RequestHandleService$RequestHandleTask removeUser
+INFO: Client /127.0.0.1:50233 disabled
+мая 25, 2025 10:50:29 PM com.glebestraikh.chat.server.service.AcceptService$AcceptTask run
+INFO: Client /127.0.0.1:50239 accepted
+мая 25, 2025 10:50:29 PM com.glebestraikh.chat.server.service.AcceptService$AcceptTask run
+INFO: Set timeout for client /127.0.0.1:50239
+мая 25, 2025 10:50:29 PM com.glebestraikh.chat.server.service.AcceptService$AcceptTask run
+INFO: Create read/write client /127.0.0.1:50239 connection
+мая 25, 2025 10:50:29 PM com.glebestraikh.chat.server.service.RegisterService$RegisterTask run
+INFO: Client /127.0.0.1:50239 is registered
+мая 25, 2025 10:51:08 PM com.glebestraikh.chat.server.service.RequestHandleService$RequestHandleTask removeUser
+INFO: Client /127.0.0.1:50239 disabled
+мая 25, 2025 11:19:53 PM com.glebestraikh.chat.server.service.AcceptService$AcceptTask run
+INFO: Client /127.0.0.1:50571 accepted
+мая 25, 2025 11:19:53 PM com.glebestraikh.chat.server.service.AcceptService$AcceptTask run
+INFO: Set timeout for client /127.0.0.1:50571
+мая 25, 2025 11:19:53 PM com.glebestraikh.chat.server.service.AcceptService$AcceptTask run
+INFO: Create read/write client /127.0.0.1:50571 connection
+мая 25, 2025 11:19:53 PM com.glebestraikh.chat.server.service.RegisterService$RegisterTask run
+INFO: Client /127.0.0.1:50571 is registered
+мая 25, 2025 11:20:11 PM com.glebestraikh.chat.server.service.RequestHandleService$RequestHandleTask removeUser
+INFO: Client /127.0.0.1:50571 disabled

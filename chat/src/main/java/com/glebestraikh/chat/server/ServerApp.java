@@ -1,6 +1,7 @@
 package com.glebestraikh.chat.server;
 
 import com.glebestraikh.chat.server.dto.DTOFormat;
+import com.glebestraikh.chat.util.ServerConfig;
 
 import java.io.IOException;
 import java.net.InetAddress;

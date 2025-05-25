@@ -1,6 +1,6 @@
 package com.glebestraikh.chat.client.service;
 
-import com.glebestraikh.chat.client.listener.ListeningSupport;
+import com.glebestraikh.chat.client.listener.ListenerManager;
 import com.glebestraikh.chat.client.listener.event.ErrorEvent;
 import com.glebestraikh.chat.server.connection.Connection;
 import com.glebestraikh.chat.server.dto.DTO;
@@ -13,9 +13,9 @@ import java.util.concurrent.Future;
 
 public class UserRegistrationService {
     private final ExecutorService registrar = Executors.newSingleThreadExecutor();
-    private final ListeningSupport listeningSupport;
+    private final ListenerManager listeningSupport;
 
-    public UserRegistrationService(ListeningSupport listeningSupport) {
+    public UserRegistrationService(ListenerManager listeningSupport) {
         this.listeningSupport = listeningSupport;
     }
 

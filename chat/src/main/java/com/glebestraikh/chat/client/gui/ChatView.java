@@ -1,6 +1,6 @@
-package com.glebestraikh.chat.client.view;
+package com.glebestraikh.chat.client.gui;
 
-import com.glebestraikh.chat.client.controller.Controller;
+import com.glebestraikh.chat.client.controller.ClientController;
 import com.glebestraikh.chat.client.listener.event.*;
 import com.glebestraikh.chat.client.listener.Listener;
 
@@ -24,12 +24,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
-public class WorkSpaceFrame {
+public class ChatView {
     private static final String TITLE = "XChat";
     private static final String SEND_BUTTON_ICON_FILE = "pngForChatPanel/sendButton.png";
     private static final String USERS_BUTTON_ICON_FILE = "pngForChatPanel/usersButton.png";
@@ -62,10 +61,9 @@ public class WorkSpaceFrame {
     private final JFrame frame = new JFrame();
     private final JPanel chatPanel = new JPanel();
     private final JTextArea inputArea = new JTextArea();
-    private final WorkSpaceListener listener = new WorkSpaceListener();
-    private final Controller controller;
+    private final ClientController controller;
 
-    public WorkSpaceFrame(Controller controller) {
+    public ChatView(ClientController controller) {
         frame.setTitle(TITLE);
         frame.setSize(WIDTH, HEIGHT);
         frame.setLocationRelativeTo(null);
@@ -75,7 +73,7 @@ public class WorkSpaceFrame {
         frame.setVisible(true);
 
         this.controller = controller;
-        controller.addListener(listener);
+        controller.addListener(new ChatViewListener());
         controller.handleDTO();
     }
 
@@ -158,7 +156,6 @@ public class WorkSpaceFrame {
         scrollPane.setBorder(BorderFactory.createLineBorder(INPUT_BORDER_COLOR, 1));
         scrollPane.setBackground(INPUT_BACKGROUND_COLOR);
 
-        // Эффекты фокуса для области ввода
         inputArea.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 scrollPane.setBorder(BorderFactory.createLineBorder(INPUT_FOCUS_COLOR, 2));
@@ -191,16 +188,14 @@ public class WorkSpaceFrame {
         button.setFocusPainted(false);
         button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        // Попытка загрузить иконку, если не получается - используем текст
         try {
-            URL buttonIconUrl = StartMenuFrame.class.getClassLoader().getResource(iconFile);
+            URL buttonIconUrl = LoginView.class.getClassLoader().getResource(iconFile);
             if (buttonIconUrl != null) {
                 Image buttonImage = Toolkit.getDefaultToolkit().createImage(buttonIconUrl);
                 ImageIcon buttonIcon = new ImageIcon(
                         buttonImage.getScaledInstance(BUTTON_ICON_SIZE, BUTTON_ICON_SIZE, Image.SCALE_SMOOTH));
                 button.setIcon(buttonIcon);
             } else {
-                // Если иконка не найдена, используем текст
                 if (iconFile.contains("send")) {
                     button.setText("Send");
                 } else if (iconFile.contains("users")) {
@@ -209,7 +204,6 @@ public class WorkSpaceFrame {
                 button.setForeground(TEXT_PRIMARY_COLOR);
             }
         } catch (Exception e) {
-            // Fallback к тексту если что-то пошло не так с иконками
             if (iconFile.contains("send")) {
                 button.setText("Send");
             } else if (iconFile.contains("users")) {
@@ -218,7 +212,6 @@ public class WorkSpaceFrame {
             button.setForeground(TEXT_PRIMARY_COLOR);
         }
 
-        // Эффекты наведения
         button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 button.setBackground(BUTTON_HOVER_COLOR);
@@ -236,7 +229,7 @@ public class WorkSpaceFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             String message = inputArea.getText().trim();
-            if (message == null || message.isEmpty()) {
+            if (message.isEmpty()) {
                 return;
             }
 
@@ -250,7 +243,7 @@ public class WorkSpaceFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             String[] users = controller.getUsers();
-            SwingUtilities.invokeLater(() -> new UsersDialog(frame, users));
+            SwingUtilities.invokeLater(() -> new UserListView(frame, users));
         }
     }
 
@@ -268,8 +261,8 @@ public class WorkSpaceFrame {
         }
     }
 
-    private class WorkSpaceListener implements Listener {
-        public WorkSpaceListener() {
+    private class ChatViewListener implements Listener {
+        public ChatViewListener() {
         }
 
         @Override
@@ -317,7 +310,6 @@ public class WorkSpaceFrame {
             messageContainer.setBackground(CHAT_BACKGROUND_COLOR);
             messageContainer.setBorder(BorderFactory.createEmptyBorder(4, 0, 12, 0));
 
-            // Панель для имени пользователя
             JPanel usernamePanel = new JPanel(new java.awt.FlowLayout(
                     isCurrentUser ? java.awt.FlowLayout.RIGHT : java.awt.FlowLayout.LEFT, 0, 0));
             usernamePanel.setBackground(CHAT_BACKGROUND_COLOR);
@@ -330,17 +322,12 @@ public class WorkSpaceFrame {
             usernamePanel.add(usernameLabel);
             messageContainer.add(usernamePanel);
 
-            // Панель для сообщения
             JPanel messageBubblePanel = new JPanel(new java.awt.FlowLayout(
                     isCurrentUser ? java.awt.FlowLayout.RIGHT : java.awt.FlowLayout.LEFT, 0, 0));
             messageBubblePanel.setBackground(CHAT_BACKGROUND_COLOR);
 
             JLabel messageLabel = new JLabel();
-            messageLabel.setText("<html><div style='padding: 8px 12px; max-width: 400px;'>" +
-                    message.replace("<", "&lt;")
-                            .replace(">", "&gt;")
-                            .replace("\n", "<br/>") +
-                    "</div></html>");
+            messageLabel.setText("<html><div style='padding: 8px 12px; max-width: 400px;'>" + message.replace("<", "&lt;").replace(">", "&gt;").replace("\n", "<br/>") + "</div></html>");
             messageLabel.setFont(MESSAGE_FONT);
             messageLabel.setForeground(TEXT_PRIMARY_COLOR);
             messageLabel.setBackground(isCurrentUser ? MESSAGE_BUBBLE_CURRENT_COLOR : MESSAGE_BUBBLE_OTHER_COLOR);
@@ -355,7 +342,6 @@ public class WorkSpaceFrame {
 
             chatPanel.add(messageContainer);
 
-            // Автоскролл вниз
             SwingUtilities.invokeLater(() -> {
                 JScrollPane scrollPane = (JScrollPane) chatPanel.getParent().getParent();
                 scrollPane.getVerticalScrollBar().setValue(scrollPane.getVerticalScrollBar().getMaximum());
