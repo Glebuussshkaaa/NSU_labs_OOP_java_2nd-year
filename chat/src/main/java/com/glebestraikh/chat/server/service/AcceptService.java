@@ -31,10 +31,6 @@ public class AcceptService {
         acceptor.execute(new AcceptTask());
     }
 
-    public void shutdown() {
-        acceptor.shutdown();
-    }
-
     private class AcceptTask implements Runnable {
         @Override
         public void run() {

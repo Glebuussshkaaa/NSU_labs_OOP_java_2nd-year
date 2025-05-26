@@ -25,10 +25,6 @@ public class RequestHandleService {
         handlers.execute(new RequestHandleTask(connection));
     }
 
-    public void shutdown() {
-        handlers.shutdown();
-    }
-
     private class RequestHandleTask implements Runnable {
         private final User user;
 

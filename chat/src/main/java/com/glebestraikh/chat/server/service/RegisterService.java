@@ -26,11 +26,6 @@ public class RegisterService {
         registrars.execute(new RegisterTask(connection));
     }
 
-    public void shutdown() {
-        registrars.shutdown();
-    }
-
-
     private class RegisterTask implements Runnable {
         private final Connection connection;
 

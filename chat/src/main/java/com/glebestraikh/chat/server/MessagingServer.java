@@ -19,5 +19,7 @@ public class MessagingServer {
         RegisterService registerService = new RegisterService(userRepository, requestHandleService);
         AcceptService acceptService = new AcceptService(serverSocket, timeout, dtoFormat, registerService);
         acceptService.accept();
+        System.out.printf("✅ Сервер запущен на %s:%d, timeout: %d мс, формат DTO: %s%n",
+                address.getHostAddress(), port, timeout, dtoFormat);
     }
 }

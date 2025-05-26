@@ -16,7 +16,7 @@ public class ServerApp {
             }
             LogManager.getLogManager().readConfiguration(config);
         } catch (Exception e) {
-            System.err.println(STR."Failed to load logging.properties: \{e.getMessage()}");
+            System.err.println("Failed to load logging.properties: " + e.getMessage());
             System.exit(1);
         }
 
