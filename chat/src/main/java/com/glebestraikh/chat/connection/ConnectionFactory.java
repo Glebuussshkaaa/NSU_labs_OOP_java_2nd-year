@@ -1,6 +1,6 @@
 package com.glebestraikh.chat.connection;
 
-import com.glebestraikh.chat.dto.DTOFormat;
+import com.glebestraikh.chat.util.DTOFormat;
 
 public class ConnectionFactory {
     private ConnectionFactory() {

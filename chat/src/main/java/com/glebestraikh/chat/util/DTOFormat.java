@@ -1,4 +1,4 @@
-package com.glebestraikh.chat.dto;
+package com.glebestraikh.chat.util;
 
 public enum DTOFormat {
     JAVA_OBJECT,

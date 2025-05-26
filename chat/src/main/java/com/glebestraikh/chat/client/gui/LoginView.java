@@ -53,7 +53,7 @@ public class LoginView {
     private final JTextField serverPortTextField = new JTextField();
     private final JTextField usernameTextField = new JTextField();
     private final JLabel errorMessageLabel = new JLabel();
-    private final ClientController controller = new ClientController();
+    private final ClientController clientController = new ClientController();
     private final GridBagConstraints contentPaneConstraints = new GridBagConstraints();
     private final LoginViewListener listener = new LoginViewListener();
 
@@ -65,7 +65,7 @@ public class LoginView {
         frame.setContentPane(createContentPane());
         frame.setVisible(true);
 
-        controller.addListener(listener);
+        clientController.addListener(listener);
     }
 
     private JPanel createContentPane() {
@@ -263,17 +263,17 @@ public class LoginView {
                 return;
             }
 
-            if (!controller.connect(serverAddress, serverPort)) {
+            if (!clientController.connect(serverAddress, serverPort)) {
                 return;
             }
-            if (!controller.login(username)) {
+            if (!clientController.login(username)) {
                 return;
             }
 
             SwingUtilities.invokeLater(() -> {
                 frame.dispose();
-                controller.removeListener(listener);
-                new ChatView(controller);
+                clientController.removeListener(listener);
+                new ChatView(clientController);
             });
         }
     }

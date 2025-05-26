@@ -16,11 +16,11 @@ public class ServerRegistrationService {
     private static final int REGISTRAR_COUNT = 3;
     private final ExecutorService registrars = Executors.newFixedThreadPool(REGISTRAR_COUNT);
     private final UserRepository userRepository;
-    private final ServerDTOHandleService requestHandleService;
+    private final ServerDTOHandleService serverDTOHandleService;
 
     public ServerRegistrationService(UserRepository userRepository, ServerDTOHandleService requestHandleService) {
         this.userRepository = userRepository;
-        this.requestHandleService = requestHandleService;
+        this.serverDTOHandleService = requestHandleService;
     }
     public void register(Connection connection) {
         registrars.execute(new RegisterTask(connection));
@@ -52,7 +52,7 @@ public class ServerRegistrationService {
                     userRepository.addUser(new User(request.getUsername(), connection));
                     sendEvent(DTO.newLoginEvent(request.getUsername()));
                     logger.info(String.format("Client %s is registered", connection.getSocket().getRemoteSocketAddress()));
-                    requestHandleService.handle(connection);
+                    serverDTOHandleService.handle(connection);
                     return;
                 }
             }

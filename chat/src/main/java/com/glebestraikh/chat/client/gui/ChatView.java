@@ -61,7 +61,7 @@ public class ChatView {
     private final JFrame frame = new JFrame();
     private final JPanel chatPanel = new JPanel();
     private final JTextArea inputArea = new JTextArea();
-    private final ClientController controller;
+    private final ClientController clientController;
 
     public ChatView(ClientController controller) {
         frame.setTitle(TITLE);
@@ -72,7 +72,7 @@ public class ChatView {
         frame.setContentPane(createContentPane());
         frame.setVisible(true);
 
-        this.controller = controller;
+        this.clientController = controller;
         controller.addListener(new ChatViewListener());
         controller.handleDTO();
     }
@@ -235,14 +235,14 @@ public class ChatView {
 
             inputArea.setText("");
             inputArea.repaint();
-            controller.sendNewMessage(message);
+            clientController.sendNewMessage(message);
         }
     }
 
     private class UsersButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            String[] users = controller.getUsers();
+            String[] users = clientController.getUsers();
             SwingUtilities.invokeLater(() -> new UserListView(frame, users));
         }
     }
@@ -256,7 +256,7 @@ public class ChatView {
 
         @Override
         public void windowClosing(WindowEvent e) {
-            controller.logout();
+            clientController.logout();
             owner.dispose();
         }
     }

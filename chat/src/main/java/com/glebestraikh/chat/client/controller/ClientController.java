@@ -16,16 +16,16 @@ import java.net.InetAddress;
 import java.net.Socket;
 
 public class ClientController {
-    private final ListenerManager ListenerManager = new ListenerManager();
+    private final ListenerManager listenerManager = new ListenerManager();
     private Connection connection;
-    private ClientDTOHandleService dtoHandleService;
+    private ClientDTOHandleService clientDTOHandleService;
 
     public void addListener(Listener listener) {
-        ListenerManager.addListener(listener);
+        listenerManager.addListener(listener);
     }
 
     public void removeListener(Listener listener) {
-        ListenerManager.removeListener(listener);
+        listenerManager.removeListener(listener);
     }
 
     public boolean connect(InetAddress serverAddress, int serverPort) {
@@ -40,7 +40,7 @@ public class ClientController {
             connection = ConnectionFactory.newConnection(ServerConfig.getDTOFormat());
             connection.connect(clientSocket);
         } catch (IOException e) {
-            ListenerManager.notifyListeners(new ErrorEvent("Server is not available"));
+            listenerManager.notifyListeners(new ErrorEvent("Server is not available"));
             return false;
         }
 
@@ -52,31 +52,31 @@ public class ClientController {
             return false;
         }
 
-        ClientRegistrationService registerService = new ClientRegistrationService(ListenerManager);
-        boolean registerResult = registerService.register(connection, username);
-        registerService.shutdown();
+        ClientRegistrationService clientRegistrationService = new ClientRegistrationService(listenerManager);
+        boolean registerResult = clientRegistrationService.register(connection, username);
+        clientRegistrationService.shutdown();
 
         if (registerResult) {
-            dtoHandleService = new ClientDTOHandleService(username, connection, ListenerManager);
+            clientDTOHandleService = new ClientDTOHandleService(username, connection, listenerManager);
         }
 
         return registerResult;
     }
 
     public void handleDTO() {
-        dtoHandleService.handle();
+        clientDTOHandleService.handle();
     }
 
     public String[] getUsers() {
-        if (dtoHandleService == null) {
-            ListenerManager.notifyListeners(new ErrorEvent("Client not registered"));
+        if (clientDTOHandleService == null) {
+            listenerManager.notifyListeners(new ErrorEvent("Client not registered"));
             return new String[]{};
         }
 
-        DTO response = dtoHandleService.sendRequest(DTO.newUserListRequest());
+        DTO response = clientDTOHandleService.sendRequest(DTO.newUserListRequest());
 
         if (response.getSubtype() == DTO.Subtype.ERROR) {
-            ListenerManager.notifyListeners(new ErrorEvent(response.getMessage()));
+            listenerManager.notifyListeners(new ErrorEvent(response.getMessage()));
             return new String[]{};
         }
 
@@ -84,30 +84,30 @@ public class ClientController {
     }
 
     public void sendNewMessage(String message) {
-        if (dtoHandleService == null) {
-            ListenerManager.notifyListeners(new ErrorEvent("Client not registered"));
+        if (clientDTOHandleService == null) {
+            listenerManager.notifyListeners(new ErrorEvent("Client not registered"));
             return;
         }
 
-        DTO response = dtoHandleService.sendRequest(DTO.newNewMessageRequest(message));
+        DTO response = clientDTOHandleService.sendRequest(DTO.newNewMessageRequest(message));
 
         if (response.getSubtype() == Subtype.ERROR) {
-            ListenerManager.notifyListeners(new ErrorEvent(response.getMessage()));
+            listenerManager.notifyListeners(new ErrorEvent(response.getMessage()));
         }
     }
 
     public void logout() {
-        if (dtoHandleService == null) {
-            ListenerManager.notifyListeners(new ErrorEvent("Client not registered"));
+        if (clientDTOHandleService == null) {
+            listenerManager.notifyListeners(new ErrorEvent("Client not registered"));
             return;
         }
 
-        DTO response = dtoHandleService.sendRequest(DTO.newLogoutRequest());
+        DTO response = clientDTOHandleService.sendRequest(DTO.newLogoutRequest());
 
         if (response.getSubtype() == Subtype.ERROR) {
-            ListenerManager.notifyListeners(new ErrorEvent(response.getMessage()));
+            listenerManager.notifyListeners(new ErrorEvent(response.getMessage()));
         }
 
-        dtoHandleService.shutdown();
+        clientDTOHandleService.shutdown();
     }
 }

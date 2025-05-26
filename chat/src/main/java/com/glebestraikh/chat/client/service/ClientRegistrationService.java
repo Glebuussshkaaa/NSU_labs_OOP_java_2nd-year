@@ -13,10 +13,10 @@ import java.util.concurrent.Future;
 
 public class ClientRegistrationService {
     private final ExecutorService registrar = Executors.newSingleThreadExecutor();
-    private final ListenerManager ListenerManager;
+    private final ListenerManager listenerManager;
 
     public ClientRegistrationService(ListenerManager listeningSupport) {
-        this.ListenerManager = listeningSupport;
+        this.listenerManager = listeningSupport;
     }
 
     public boolean register(Connection connection, String username) {
@@ -26,12 +26,12 @@ public class ClientRegistrationService {
         try {
             response = futureResponse.get();
         } catch (InterruptedException | ExecutionException e) {
-            ListenerManager.notifyListeners(new ErrorEvent("Connection error"));
+            listenerManager.notifyListeners(new ErrorEvent("Connection error"));
             return false;
         }
 
         if (DTO.isErrorResponse(response)) {
-            ListenerManager.notifyListeners(new ErrorEvent(response.getMessage()));
+            listenerManager.notifyListeners(new ErrorEvent(response.getMessage()));
             return false;
         }
 

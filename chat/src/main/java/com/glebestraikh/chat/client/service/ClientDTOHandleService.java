@@ -26,12 +26,12 @@ public class ClientDTOHandleService {
     private final Map<UUID, CompletableFuture<DTO>> requests = new ConcurrentHashMap<>();
     private final String username;
     private final Connection connection;
-    private final ListenerManager ListenerManager;
+    private final ListenerManager listenerManager;
 
     public ClientDTOHandleService(String username, Connection connection, ListenerManager listeningSupport) {
         this.username = username;
         this.connection = connection;
-        this.ListenerManager = listeningSupport;
+        this.listenerManager = listeningSupport;
     }
 
     public void handle() {
@@ -52,7 +52,7 @@ public class ClientDTOHandleService {
         try {
             return futureResponse.get();
         } catch (InterruptedException | ExecutionException e) {
-            ListenerManager.notifyListeners(new ErrorEvent("Server is not available"));
+            listenerManager.notifyListeners(new ErrorEvent("Server is not available"));
         }
 
         return null;
@@ -75,7 +75,7 @@ public class ClientDTOHandleService {
                 try {
                     dto = connection.receive();
                 } catch (IOException e) {
-                    ListenerManager.notifyListeners(new ErrorEvent("Server is not available"));
+                    listenerManager.notifyListeners(new ErrorEvent("Server is not available"));
                     return;
                 }
 
@@ -97,13 +97,13 @@ public class ClientDTOHandleService {
 
         private void processEvent(DTO event) {
             if (DTO.isLoginEvent(event)) {
-                ListenerManager.notifyListeners(new LoginEvent(event.getUsername()));
+                listenerManager.notifyListeners(new LoginEvent(event.getUsername()));
             } else if (DTO.isNewMessageEvent(event)) {
                 boolean isCurrentUser = Objects.equals(event.getUsername(), username);
-                ListenerManager.notifyListeners(
+                listenerManager.notifyListeners(
                         new NewMessageEvent(event.getUsername(), isCurrentUser, event.getMessage()));
             } else if (DTO.isLogoutEvent(event)) {
-                ListenerManager.notifyListeners(new LogoutEvent(event.getUsername()));
+                listenerManager.notifyListeners(new LogoutEvent(event.getUsername()));
             }
         }
     }

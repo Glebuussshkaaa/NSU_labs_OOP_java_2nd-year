@@ -2,7 +2,7 @@ package com.glebestraikh.chat.server.service;
 
 import com.glebestraikh.chat.connection.Connection;
 import com.glebestraikh.chat.connection.ConnectionFactory;
-import com.glebestraikh.chat.dto.DTOFormat;
+import com.glebestraikh.chat.util.DTOFormat;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -18,13 +18,13 @@ public class ServerAcceptService {
     private final ServerSocket serverSocket;
     private final int timeout;
     private final DTOFormat dtoFormat;
-    private final ServerRegistrationService registerService;
+    private final ServerRegistrationService serverRegistrationService;
 
     public ServerAcceptService(ServerSocket serverSocket, int timeout, DTOFormat dtoFormat, ServerRegistrationService registerService) {
         this.serverSocket = serverSocket;
         this.timeout = timeout;
         this.dtoFormat = dtoFormat;
-        this.registerService = registerService;
+        this.serverRegistrationService = registerService;
     }
 
     public void accept() {
@@ -41,7 +41,7 @@ public class ServerAcceptService {
                 }
                 logger.info(String.format("Client %s accepted", clientSocket.getRemoteSocketAddress()));
 
-                if (setTimeout(clientSocket)) {
+                if (!setTimeout(clientSocket)) {
                     continue;
                 }
                 logger.info(String.format("Set timeout for client %s", clientSocket.getRemoteSocketAddress()));
@@ -52,7 +52,7 @@ public class ServerAcceptService {
                 }
                 logger.info(String.format("Create read/write client %s connection", clientSocket.getRemoteSocketAddress()));
 
-                registerService.register(connection);
+                serverRegistrationService.register(connection);
             }
         }
 
@@ -74,10 +74,10 @@ public class ServerAcceptService {
             } catch (IOException e) {
                 logger.log(Level.SEVERE, "Failed to set socket timeout", e);
                 closeResource(clientSocket);
-                return true;
+                return false;
             }
 
-            return false;
+            return true;
         }
 
         private Connection createConnection(Socket clientSocket) {
