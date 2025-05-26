@@ -1,9 +1,9 @@
 package com.glebestraikh.chat.server.service;
 
-import com.glebestraikh.chat.server.connection.Connection;
-import com.glebestraikh.chat.server.dto.DTO;
-import com.glebestraikh.chat.server.database.User;
-import com.glebestraikh.chat.server.database.UserRepository;
+import com.glebestraikh.chat.connection.Connection;
+import com.glebestraikh.chat.dto.DTO;
+import com.glebestraikh.chat.server.data.User;
+import com.glebestraikh.chat.server.data.UserRepository;
 
 import java.io.IOException;
 import java.util.concurrent.ExecutorService;
@@ -11,13 +11,13 @@ import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class RequestHandleService {
-    private static final Logger logger = Logger.getLogger(RequestHandleService.class.getName());
+public class ServerDTOHandleService {
+    private static final Logger logger = Logger.getLogger(ServerDTOHandleService.class.getName());
     private static final int HANDLER_COUNT = 3;
     private final ExecutorService handlers = Executors.newFixedThreadPool(HANDLER_COUNT);
     private final UserRepository userRepository;
 
-    public RequestHandleService(UserRepository userRepository) {
+    public ServerDTOHandleService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

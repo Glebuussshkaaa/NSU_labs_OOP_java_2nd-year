@@ -1,4 +1,6 @@
-package com.glebestraikh.chat.server.dto;
+package com.glebestraikh.chat.util;
+
+import com.glebestraikh.chat.dto.DTO;
 
 import java.io.StringReader;
 import java.io.StringWriter;

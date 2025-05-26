@@ -1,7 +1,7 @@
-package com.glebestraikh.chat.server.connection;
+package com.glebestraikh.chat.connection;
 
-import com.glebestraikh.chat.server.dto.DTO;
-import com.glebestraikh.chat.server.dto.XmlUtils;
+import com.glebestraikh.chat.dto.DTO;
+import com.glebestraikh.chat.util.XmlUtils;
 
 import java.io.*;
 import java.net.Socket;

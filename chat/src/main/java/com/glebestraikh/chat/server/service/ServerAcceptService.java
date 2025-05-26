@@ -1,8 +1,8 @@
 package com.glebestraikh.chat.server.service;
 
-import com.glebestraikh.chat.server.connection.Connection;
-import com.glebestraikh.chat.server.connection.ConnectionFactory;
-import com.glebestraikh.chat.server.dto.DTOFormat;
+import com.glebestraikh.chat.connection.Connection;
+import com.glebestraikh.chat.connection.ConnectionFactory;
+import com.glebestraikh.chat.dto.DTOFormat;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -12,15 +12,15 @@ import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class AcceptService {
-    private static final Logger logger = Logger.getLogger(AcceptService.class.getName());
+public class ServerAcceptService {
+    private static final Logger logger = Logger.getLogger(ServerAcceptService.class.getName());
     private final ExecutorService acceptor = Executors.newSingleThreadExecutor();
     private final ServerSocket serverSocket;
     private final int timeout;
     private final DTOFormat dtoFormat;
-    private final RegisterService registerService;
+    private final ServerRegistrationService registerService;
 
-    public AcceptService(ServerSocket serverSocket, int timeout, DTOFormat dtoFormat, RegisterService registerService) {
+    public ServerAcceptService(ServerSocket serverSocket, int timeout, DTOFormat dtoFormat, ServerRegistrationService registerService) {
         this.serverSocket = serverSocket;
         this.timeout = timeout;
         this.dtoFormat = dtoFormat;

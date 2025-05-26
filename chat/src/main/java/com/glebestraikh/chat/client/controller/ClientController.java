@@ -3,13 +3,13 @@ package com.glebestraikh.chat.client.controller;
 import com.glebestraikh.chat.client.listener.Listener;
 import com.glebestraikh.chat.client.listener.ListenerManager;
 import com.glebestraikh.chat.client.listener.event.ErrorEvent;
-import com.glebestraikh.chat.client.service.DTOHandleService;
-import com.glebestraikh.chat.client.service.UserRegistrationService;
+import com.glebestraikh.chat.client.service.ClientDTOHandleService;
+import com.glebestraikh.chat.client.service.ClientRegistrationService;
 import com.glebestraikh.chat.util.ServerConfig;
-import com.glebestraikh.chat.server.connection.Connection;
-import com.glebestraikh.chat.server.connection.ConnectionFactory;
-import com.glebestraikh.chat.server.dto.DTO;
-import com.glebestraikh.chat.server.dto.DTO.Subtype;
+import com.glebestraikh.chat.connection.Connection;
+import com.glebestraikh.chat.connection.ConnectionFactory;
+import com.glebestraikh.chat.dto.DTO;
+import com.glebestraikh.chat.dto.DTO.Subtype;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -18,7 +18,7 @@ import java.net.Socket;
 public class ClientController {
     private final ListenerManager ListenerManager = new ListenerManager();
     private Connection connection;
-    private DTOHandleService dtoHandleService;
+    private ClientDTOHandleService dtoHandleService;
 
     public void addListener(Listener listener) {
         ListenerManager.addListener(listener);
@@ -52,12 +52,12 @@ public class ClientController {
             return false;
         }
 
-        UserRegistrationService registerService = new UserRegistrationService(ListenerManager);
+        ClientRegistrationService registerService = new ClientRegistrationService(ListenerManager);
         boolean registerResult = registerService.register(connection, username);
         registerService.shutdown();
 
         if (registerResult) {
-            dtoHandleService = new DTOHandleService(username, connection, ListenerManager);
+            dtoHandleService = new ClientDTOHandleService(username, connection, ListenerManager);
         }
 
         return registerResult;

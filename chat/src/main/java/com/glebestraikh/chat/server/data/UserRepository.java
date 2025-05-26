@@ -1,6 +1,6 @@
-package com.glebestraikh.chat.server.database;
+package com.glebestraikh.chat.server.data;
 
-import com.glebestraikh.chat.server.connection.Connection;
+import com.glebestraikh.chat.connection.Connection;
 
 public interface UserRepository {
     void addUser(User user);

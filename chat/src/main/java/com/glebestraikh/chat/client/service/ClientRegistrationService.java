@@ -2,8 +2,8 @@ package com.glebestraikh.chat.client.service;
 
 import com.glebestraikh.chat.client.listener.ListenerManager;
 import com.glebestraikh.chat.client.listener.event.ErrorEvent;
-import com.glebestraikh.chat.server.connection.Connection;
-import com.glebestraikh.chat.server.dto.DTO;
+import com.glebestraikh.chat.connection.Connection;
+import com.glebestraikh.chat.dto.DTO;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -11,11 +11,11 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-public class UserRegistrationService {
+public class ClientRegistrationService {
     private final ExecutorService registrar = Executors.newSingleThreadExecutor();
     private final ListenerManager ListenerManager;
 
-    public UserRegistrationService(ListenerManager listeningSupport) {
+    public ClientRegistrationService(ListenerManager listeningSupport) {
         this.ListenerManager = listeningSupport;
     }
 

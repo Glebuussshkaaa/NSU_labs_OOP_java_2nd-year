@@ -1,6 +1,6 @@
 package com.glebestraikh.chat.server;
 
-import com.glebestraikh.chat.server.dto.DTOFormat;
+import com.glebestraikh.chat.dto.DTOFormat;
 import com.glebestraikh.chat.util.ServerConfig;
 
 import java.io.IOException;

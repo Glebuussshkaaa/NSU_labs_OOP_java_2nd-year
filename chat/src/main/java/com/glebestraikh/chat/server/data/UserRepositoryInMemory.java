@@ -1,6 +1,6 @@
-package com.glebestraikh.chat.server.database;
+package com.glebestraikh.chat.server.data;
 
-import com.glebestraikh.chat.server.connection.Connection;
+import com.glebestraikh.chat.connection.Connection;
 
 import java.util.HashSet;
 import java.util.Objects;

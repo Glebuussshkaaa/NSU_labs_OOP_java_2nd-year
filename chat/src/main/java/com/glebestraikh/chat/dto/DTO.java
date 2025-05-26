@@ -1,4 +1,4 @@
-package com.glebestraikh.chat.server.dto;
+package com.glebestraikh.chat.dto;
 
 import java.io.Serializable;
 import java.util.UUID;
@@ -88,10 +88,6 @@ public class DTO implements Serializable {
 
     public static DTO newLogoutEvent(String username) {
         return new DTO(Type.EVENT, Subtype.LOGOUT, null, username, null, null);
-    }
-
-    public static boolean isRequest(DTO dto) {
-        return dto.getType() == Type.REQUEST;
     }
 
     public static boolean isResponse(DTO dto) {

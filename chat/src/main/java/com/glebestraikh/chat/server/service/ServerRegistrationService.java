@@ -1,9 +1,9 @@
 package com.glebestraikh.chat.server.service;
 
-import com.glebestraikh.chat.server.connection.Connection;
-import com.glebestraikh.chat.server.dto.DTO;
-import com.glebestraikh.chat.server.database.User;
-import com.glebestraikh.chat.server.database.UserRepository;
+import com.glebestraikh.chat.connection.Connection;
+import com.glebestraikh.chat.dto.DTO;
+import com.glebestraikh.chat.server.data.User;
+import com.glebestraikh.chat.server.data.UserRepository;
 
 import java.io.IOException;
 import java.util.concurrent.ExecutorService;
@@ -11,14 +11,14 @@ import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class RegisterService {
-    private static final Logger logger = Logger.getLogger(RegisterService.class.getName());
-    private static final int REGISTRAR_COUNT = 2;
+public class ServerRegistrationService {
+    private static final Logger logger = Logger.getLogger(ServerRegistrationService.class.getName());
+    private static final int REGISTRAR_COUNT = 3;
     private final ExecutorService registrars = Executors.newFixedThreadPool(REGISTRAR_COUNT);
     private final UserRepository userRepository;
-    private final RequestHandleService requestHandleService;
+    private final ServerDTOHandleService requestHandleService;
 
-    public RegisterService(UserRepository userRepository, RequestHandleService requestHandleService) {
+    public ServerRegistrationService(UserRepository userRepository, ServerDTOHandleService requestHandleService) {
         this.userRepository = userRepository;
         this.requestHandleService = requestHandleService;
     }

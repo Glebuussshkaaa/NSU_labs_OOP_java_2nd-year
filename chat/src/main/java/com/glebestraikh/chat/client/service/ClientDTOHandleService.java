@@ -5,8 +5,8 @@ import com.glebestraikh.chat.client.listener.event.ErrorEvent;
 import com.glebestraikh.chat.client.listener.event.LoginEvent;
 import com.glebestraikh.chat.client.listener.event.LogoutEvent;
 import com.glebestraikh.chat.client.listener.event.NewMessageEvent;
-import com.glebestraikh.chat.server.connection.Connection;
-import com.glebestraikh.chat.server.dto.DTO;
+import com.glebestraikh.chat.connection.Connection;
+import com.glebestraikh.chat.dto.DTO;
 
 import java.io.IOException;
 import java.util.Map;
@@ -18,7 +18,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class DTOHandleService {
+public class ClientDTOHandleService {
     private static final int SENDER_COUNT = 3;
     private static final int RECEIVER_COUNT = 3;
     private final ExecutorService senders = Executors.newFixedThreadPool(SENDER_COUNT);
@@ -28,7 +28,7 @@ public class DTOHandleService {
     private final Connection connection;
     private final ListenerManager ListenerManager;
 
-    public DTOHandleService(String username, Connection connection, ListenerManager listeningSupport) {
+    public ClientDTOHandleService(String username, Connection connection, ListenerManager listeningSupport) {
         this.username = username;
         this.connection = connection;
         this.ListenerManager = listeningSupport;

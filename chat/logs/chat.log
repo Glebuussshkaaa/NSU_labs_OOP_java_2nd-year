@@ -1,18 +1,18 @@
-мая 26, 2025 9:49:36 AM com.glebestraikh.chat.server.service.AcceptService$AcceptTask run
+мая 26, 2025 9:49:36 AM com.glebestraikh.chat.server.service.ServerAcceptService$AcceptTask run
 INFO: Client /172.20.10.11:63598 accepted
-мая 26, 2025 9:49:36 AM com.glebestraikh.chat.server.service.AcceptService$AcceptTask run
+мая 26, 2025 9:49:36 AM com.glebestraikh.chat.server.service.ServerAcceptService$AcceptTask run
 INFO: Set timeout for client /172.20.10.11:63598
-мая 26, 2025 9:49:36 AM com.glebestraikh.chat.server.service.AcceptService$AcceptTask run
+мая 26, 2025 9:49:36 AM com.glebestraikh.chat.server.service.ServerAcceptService$AcceptTask run
 INFO: Create read/write client /172.20.10.11:63598 connection
-мая 26, 2025 9:49:37 AM com.glebestraikh.chat.server.service.RegisterService$RegisterTask run
+мая 26, 2025 9:49:37 AM com.glebestraikh.chat.server.service.ServerRegistrationService$RegisterTask run
 INFO: Client /172.20.10.11:63598 is registered
-мая 26, 2025 9:50:17 AM com.glebestraikh.chat.server.service.AcceptService$AcceptTask run
+мая 26, 2025 9:50:17 AM com.glebestraikh.chat.server.service.ServerAcceptService$AcceptTask run
 INFO: Client /172.20.10.4:53410 accepted
-мая 26, 2025 9:50:17 AM com.glebestraikh.chat.server.service.AcceptService$AcceptTask run
+мая 26, 2025 9:50:17 AM com.glebestraikh.chat.server.service.ServerAcceptService$AcceptTask run
 INFO: Set timeout for client /172.20.10.4:53410
-мая 26, 2025 9:50:17 AM com.glebestraikh.chat.server.service.AcceptService$AcceptTask run
+мая 26, 2025 9:50:17 AM com.glebestraikh.chat.server.service.ServerAcceptService$AcceptTask run
 INFO: Create read/write client /172.20.10.4:53410 connection
-мая 26, 2025 9:50:17 AM com.glebestraikh.chat.server.service.RegisterService$RegisterTask run
+мая 26, 2025 9:50:17 AM com.glebestraikh.chat.server.service.ServerRegistrationService$RegisterTask run
 INFO: Client /172.20.10.4:53410 is registered
-мая 26, 2025 9:51:41 AM com.glebestraikh.chat.server.service.RequestHandleService$RequestHandleTask removeUser
+мая 26, 2025 9:51:41 AM com.glebestraikh.chat.server.service.ServerDTOHandleService$RequestHandleTask removeUser
 INFO: Client /172.20.10.4:53410 disabled
